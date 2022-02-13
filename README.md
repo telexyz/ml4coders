@@ -24,15 +24,18 @@ Chuẩn bị `#tăng_tốc` có thể dùng SIMD hoặc math lib.
 
 ## Các dự án sắp làm
 
-### b/ Viết lại `hs-rnnln` từ `word2vec`
-https://github.com/telexyz/nnlm/tree/main/hs-rnnlm
+### b/ Viết lại `hs-rnnlm` từ `word2vec`
+
+Tham khảo https://github.com/telexyz/nnlm/tree/main/hs-rnnlm
+
+Kế thừa một phần code từ https://github.com/telexyz/embed/blob/main/src/model.zig
 
 
-### c/ Viết lại `lstm-rnnln` bằng Zig
+### c/ Viết lại `lstm-rnnlm` bằng Zig
 https://github.com/telexyz/nnlm/tree/main/lstm-rnn
 
 
-### d/ Viết `quasi-rnn` bằng Zig
+### d/ Viết `quasi-rnnlm` bằng Zig
 
 
 - - -
