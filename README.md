@@ -15,11 +15,11 @@
 
 ### a/ https://github.com/telexyz/embed
 
-Đã xong `#nhà_làm`, chạy nhanh gấp 5 lần `word2vec` bản gốc, cải tiến ở việc chọn mini-batch để train.
+`#nhà_làm` train nhanh gấp 5 lần `word2vec` bản gốc, cải tiến ở việc chọn mini-batch.
 
-Chuẩn bị `#tăng_tốc` có thể dùng SIMD hoặc math lib.
+Chuẩn bị `#tăng_tốc` có thể dùng SIMD hoặc any math lib `armadillo`, `eigen`, `openblas`.
 
-`#bậc_cao` có thể làm thử với `julia` để học ngôn ngữ mới và xem có nhanh như lời đồn không
+`#bậc_cao` muốn làm thử với `julia` để xem julialang có hay như lời đồn không.
 
 
 ## Các dự án sắp làm
@@ -31,11 +31,11 @@ Tham khảo https://github.com/telexyz/nnlm/tree/main/hs-rnnlm
 Kế thừa một phần code từ https://github.com/telexyz/embed/blob/main/src/model.zig
 
 
-### c/ Viết lại `lstm-rnnlm` bằng Zig
+### c/ Viết lại `lstm-rnn` bằng Zig
 https://github.com/telexyz/nnlm/tree/main/lstm-rnn
 
 
-### d/ Viết `quasi-rnnlm` bằng Zig
+### d/ Viết `quasi-rnn` bằng Zig
 
 
 - - -
