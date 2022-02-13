@@ -15,12 +15,12 @@
 
 ### a/ https://github.com/telexyz/embed
 
-`#nhà_làm` train nhanh gấp 5 lần `word2vec` bản gốc, cải tiến ở việc chọn mini-batch.
+`#nhà_làm` tốc độ huấn luyện nhanh gấp `2 lần` bản gốc (thêm mẹo `sampling` nhanh gấp `8-9 lần`).
 
 Đã `#tăng_tốc` = SIMD (60%).
 Chuẩn bị `#tăng_tốc` = math lib `armadillo`, `eigen`, `openblas`.
 
-`#bậc_cao` muốn làm thử với `julia` để xem julialang có hay như lời đồn không.
+`#bậc_cao` muốn làm thử với `julia` xem có hay như lời đồn không.
 
 
 ## Các dự án sắp làm
@@ -42,9 +42,9 @@ https://github.com/telexyz/nnlm/tree/main/lstm-rnn
 - - -
 
 
-## Thư viện `mlpack`
+## Thư viện cơ bản
 
-### Cài mlpack từ mã nguồn
+### Cài `mlpack` từ mã nguồn
 
 https://github.com/mlpack/mlpack#4-building-mlpack-from-source
 
