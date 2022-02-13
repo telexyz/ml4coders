@@ -6,7 +6,7 @@
 2/ `#tăng_tốc`: Những phần tối ưu đơn giản dùng SIMD hoặc GPU có thể tự code luôn.
    Phần này nên dùng những libs tối ưu tính toán như `armadillo`, `eigen`, `openblas` để đỡ phải viết lại phần code tối ưu hóa cho từng CPU/GPU/PLATFORM
 
-3/ `#bậc_cao`: Cài đặt lại một lần nữa ở những ngôn ngữ bậc cao hơn và ml libs có sẵn như `mlpack/C++/zig/python/julia/go`, `jax,flax/python`, `torch/python`, `flux/julia` để ôn bài thêm lần nữa và soi xem bản `#nhà_làm` với bản `#bậc_cao` có gì khác biệt?
+3/ `#bậc_cao`: Cài đặt lại một lần nữa ở những ngôn ngữ bậc cao hơn và ml libs có sẵn như `mlpack/python,julia,go`, `jax,flax,torch/python`, `flux/julia` để ôn bài thêm lần nữa và soi xem bản `#nhà_làm` với bản `#bậc_cao` có gì khác biệt?
    Nên tham khảo các cài đặt đã có để cài đặt và tối ưu theo.
 
 ## `mlpack`
