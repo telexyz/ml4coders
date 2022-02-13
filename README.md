@@ -17,7 +17,8 @@
 
 `#nhà_làm` train nhanh gấp 5 lần `word2vec` bản gốc, cải tiến ở việc chọn mini-batch.
 
-Chuẩn bị `#tăng_tốc` có thể dùng SIMD hoặc any math lib `armadillo`, `eigen`, `openblas`.
+Đã `#tăng_tốc` = SIMD (60%).
+Chuẩn bị `#tăng_tốc` = math lib `armadillo`, `eigen`, `openblas`.
 
 `#bậc_cao` muốn làm thử với `julia` để xem julialang có hay như lời đồn không.
 
