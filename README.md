@@ -15,22 +15,25 @@
 
 ### a/ https://github.com/telexyz/embed
 
-`#nhà_làm` tốc độ huấn luyện nhanh gấp `2 lần` bản gốc (thêm mẹo `sampling` nhanh gấp `8-9 lần`).
+`#nhà_làm` tốc độ huấn luyện nhanh gấp `5 lần` bản gốc.
 
 Đã `#tăng_tốc` = SIMD (60%).
-Chuẩn bị `#tăng_tốc` = math lib `armadillo`, `eigen`, `openblas`.
+Có khả năng `#tăng_tốc` tiếp = math lib `armadillo`, `eigen`, `openblas`.
 
 `#bậc_cao` muốn làm thử với `julia` xem có hay như lời đồn không.
 
 
-## Các dự án sắp làm
-
 ### b/ Viết lại `hs-rnnlm` từ `word2vec`
+
+##### [ >> DOING << ]
 
 Tham khảo https://github.com/telexyz/nnlm/tree/main/hs-rnnlm
 
-Kế thừa một phần code từ https://github.com/telexyz/embed/blob/main/src/model.zig
+`#nhà_làm` có ghể kế thừa một phần code từ https://github.com/telexyz/embed/blob/main/src/model.zig
 
+
+
+## Các dự án sắp làm
 
 ### c/ Viết lại `lstm-rnn` bằng Zig
 https://github.com/telexyz/nnlm/tree/main/lstm-rnn
