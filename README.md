@@ -15,7 +15,7 @@
 
 ### a/ https://github.com/telexyz/embed
 
-`#nhà_làm` tốc độ huấn luyện nhanh gấp `5 lần` bản gốc.
+`#nhà_làm` tốc độ huấn luyện nhanh gấp `10 lần` bản gốc.
 
 Đã `#tăng_tốc` = SIMD (60%).
 Có khả năng `#tăng_tốc` tiếp = math lib `armadillo`, `eigen`, `openblas`.
