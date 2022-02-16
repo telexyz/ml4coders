@@ -32,12 +32,9 @@ Tham khảo https://github.com/telexyz/nnlm/tree/main/hs-rnnlm
 `#nhà_làm` có ghể kế thừa một phần code từ https://github.com/telexyz/embed/blob/main/src/model.zig
 
 
-
 ## Các dự án sắp làm
 
-### c/ Viết lại `lstm-rnn`
-https://github.com/telexyz/nnlm/tree/main/lstm-rnn
-
+### c/ Viết `lstm-rnn`
 
 ### d/ Viết `quasi-rnn`
 
@@ -45,7 +42,19 @@ https://github.com/telexyz/nnlm/tree/main/lstm-rnn
 - - -
 
 
-## Thư viện cơ bản
+## Learn
+
+* Review các papers mình thích tại [`review`](https://github.com/telexyz/ml4coders/tree/main/review)
+
+* Take note các khóa học tại [`note`](https://github.com/telexyz/ml4coders/tree/main/note)
+
+* Các đoạn code nhỏ đi kèm giải thích chi tiết về những thứ mình học được trong quá trình `note` và `review` tại [`code`](https://github.com/telexyz/ml4coders/tree/main/code)
+
+
+- - -
+
+
+## Thư viện cơ bản để triển khai ứng dụng
 
 ### Cài `mlpack` từ mã nguồn
 
