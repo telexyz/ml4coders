@@ -1,5 +1,17 @@
 # Machine learning for coders
 
+## Learn
+
+* Review các papers mình thích tại [`review`](https://github.com/telexyz/ml4coders/tree/main/review)
+
+* Take note các khóa học tại [`note`](https://github.com/telexyz/ml4coders/tree/main/note)
+
+* Các đoạn code nhỏ đi kèm giải thích chi tiết về những thứ mình học được trong quá trình `note` và `review` tại [`code`](https://github.com/telexyz/ml4coders/tree/main/code)
+
+- - 
+
+# Làm
+
 ## Tiêu chí
 
 1/ `#nhà_làm`: Tự mày mò code từ đầu bằng một ngôn ngữ lập trình hệ thống như `C/C++/Zig/Rust`
@@ -40,19 +52,6 @@ Tham khảo https://github.com/telexyz/nnlm/tree/main/hs-rnnlm
 
 
 - - -
-
-
-## Learn
-
-* Review các papers mình thích tại [`review`](https://github.com/telexyz/ml4coders/tree/main/review)
-
-* Take note các khóa học tại [`note`](https://github.com/telexyz/ml4coders/tree/main/note)
-
-* Các đoạn code nhỏ đi kèm giải thích chi tiết về những thứ mình học được trong quá trình `note` và `review` tại [`code`](https://github.com/telexyz/ml4coders/tree/main/code)
-
-
-- - -
-
 
 ## Thư viện cơ bản để triển khai ứng dụng
 
