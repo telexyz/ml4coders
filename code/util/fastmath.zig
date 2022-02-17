@@ -145,8 +145,6 @@ const SIGMOID_VALUES: [SIGMOID_SIZE]f32 = .{
     0.9797, 0.9800, 0.9803, 0.9806, 0.9809, 0.9812, 0.9815, 0.9817,
 };
 
-var exp_table: []f32 = undefined;
-
 pub fn main() !void {
     std.debug.assert(20 == dotProduct(&.{ 1, 2, 3, 4 }, &.{ 4, 3, 2, 1 }));
 }
