@@ -16,7 +16,12 @@ Mỗi file code sẽ có 1 file `.md` đi kèm để tóm tắt nội dung giả
 
 * [`01_logistic_regression.md`](https://github.com/telexyz/ml4coders/blob/main/code/01_logistic_regression.md) file chú giải đi kèm
 
-Phần này Tuộc thực hành khi đọc về [text classification](https://lena-voita.github.io/nlp_course/text_classification.html)
 
-- - -
+Để chạy code download Zig:
 
+* Window https://ziglang.org/download/0.9.1/zig-windows-x86_64-0.9.1.zip
+* MacOS https://ziglang.org/download/0.9.1/zig-macos-x86_64-0.9.1.tar.xz
+* Linux https://ziglang.org/download/#release-0.9.1
+
+Then:
+`zig run path/to/01_logistic_regression.zig`

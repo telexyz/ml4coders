@@ -66,7 +66,7 @@ pub inline fn vecMulAdd(v: []const f32, x: f32, o: []f32) void {
 
 pub inline fn sigmoid(x: f32) f32 {
     // Return sigmoid value of x
-    if (x > MAX_SIGMOID) return 1;
+    if (x >= MAX_SIGMOID) return 1;
     if (x < -MAX_SIGMOID) return 0;
 
     const index_float = ((x / MAX_SIGMOID) + 1) / 2 * SIGMOID_SIZE;
