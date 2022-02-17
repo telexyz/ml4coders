@@ -25,10 +25,12 @@ NLP folks like to operate at the word level, as that's the smallest, convenient 
 Traditional, pre-deep learning models included HMMs and CRFs.
 
 NN IDEA: for every individual input, output a prediction
+
 ![](_files/05_nn.png)
 
 
 RNN IDEA: Let’s use the previous hidden state, too
+
 ![](_files/05_rnn.png)
 
 
