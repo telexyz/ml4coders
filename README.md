@@ -39,7 +39,7 @@ Có khả năng `#tăng_tốc` tiếp = math lib `armadillo`, `eigen`, `openblas
 `#bậc_cao` muốn làm thử với `julia` xem có hay như lời đồn không.
 
 
-### b/ Viết lại `hs-rnnlm` từ `word2vec`
+### b/ Viết `hs-rnnlm`
 
 ##### [ >> DOING << ]
 
@@ -50,6 +50,4 @@ Tham khảo https://github.com/telexyz/nnlm/tree/main/hs-rnnlm
 
 ## Các dự án sắp làm
 
-### c/ Viết `lstm-rnn`
-
-### d/ Viết `quasi-rnn`
+### c/ Viết `lstm-rnn` hoặc `quasi-rnn`
