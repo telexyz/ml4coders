@@ -8,9 +8,11 @@
 
 * Take note các khóa học tại [`note`](https://github.com/telexyz/ml4coders/tree/main/note)
 
-* Các đoạn code nhỏ đi kèm giải thích chi tiết về những thứ mình học được trong quá trình `note` và `review` tại [`code`](https://github.com/telexyz/ml4coders/tree/main/code)
+* Các đoạn code nhỏ đi kèm giải thích chi tiết về những thứ mình học tại [`code`](https://github.com/telexyz/ml4coders/tree/main/code)
+
 
 - - 
+
 
 # Làm
 
