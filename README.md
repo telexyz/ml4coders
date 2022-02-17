@@ -11,7 +11,7 @@
 * Các đoạn code nhỏ đi kèm giải thích chi tiết về những thứ mình học tại [`code`](https://github.com/telexyz/ml4coders/tree/main/code)
 
 
-- - 
+- - -
 
 
 # Làm
@@ -24,8 +24,7 @@
 2/ `#tăng_tốc`: Những phần tối ưu đơn giản dùng `SIMD` hoặc `GPU` có thể tự code luôn.
    Phần nào phức tạp nên dùng những libs tối ưu tính toán như `armadillo`, `eigen`, `openblas` để đỡ thời gian viết lại cho từng HARDWARE/PLATFORM
 
-3/ `#bậc_cao`: Cài đặt lại một lần nữa ở những ngôn ngữ bậc cao hơn và ml libs có sẵn như `mlpack/python,julia,go`, `trax,torch/python`, `flux/julia`, `axion/elixir` để ôn bài thêm lần nữa và soi xem bản `#nhà_làm` với bản `#bậc_cao` có gì khác biệt?
-   Nên tham khảo các cài đặt đã có để cài đặt và tối ưu theo.
+3/ `#bậc_cao`: Cài đặt lại một lần nữa ở những ngôn ngữ bậc cao hơn và ml libs có sẵn như `mlpack/python,julia,go`, `trax,torch/python`, `flux/julia`, `axion/elixir` để ôn bài thêm lần nữa và soi xem bản `#nhà_làm` với bản `#bậc_cao` có gì khác biệt? Nên tham khảo các cài đặt đã có để cài đặt và tối ưu theo.
 
 ## Các dự án đang làm
 
