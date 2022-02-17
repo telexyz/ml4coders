@@ -10,4 +10,4 @@ Nhiều kinh nghiệm ứng dụng thực tiễn
 
 Note: Ngoài Neurual Representation thì còn nhiều cách Representation khác nữa.
 
-Hiện tại dùng projection layer thay cho embedding layer trong các mô hình nn tinh gọn đang cho kết quả tốt gần tương đương mà lượng tham số giảm đi rất nhiều (xem [pNLP-Mixer](pNLP-mixer-review.md))
+Hiện tại dùng projection layer thay cho embedding layer trong các mô hình nn tinh gọn đang cho kết quả tốt gần tương đương mà lượng tham số giảm đi rất nhiều (xem [pNLP-Mixer](pNLP-mixer.md))
