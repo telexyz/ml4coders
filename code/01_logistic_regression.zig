@@ -29,7 +29,7 @@ pub fn main() anyerror!void {
     testFastmath();
 }
 
-// Vậy là xong phần cài setup cơ bản. Đầu tiên hãy cài đặt lại hàm `logistic_sigmoid_regression` từ https://github.com/tiepvupsu/tiepvupsu.github.io/blob/master/assets/LogisticRegression/LogisticRegression_post.ipynb
+// Vậy là đã nắm được sơ sơ cách viết chương trình trong Zig. Đầu tiên hãy cài đặt lại hàm `logistic_sigmoid_regression` từ https://github.com/tiepvupsu/tiepvupsu.github.io/blob/master/assets/LogisticRegression/LogisticRegression_post.ipynb
 
 fn logistic_sigmoid_regression() void {
     //
