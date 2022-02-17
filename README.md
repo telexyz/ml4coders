@@ -4,7 +4,7 @@
 
 ## Learn
 
-* Review các papers mình thích tại [`review`](https://github.com/telexyz/ml4coders/tree/main/review)
+* Review các papers mình thích tại [`read`](https://github.com/telexyz/ml4coders/tree/main/review)
 
 * Take note các khóa học tại [`note`](https://github.com/telexyz/ml4coders/tree/main/note)
 
