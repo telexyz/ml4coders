@@ -1,6 +1,6 @@
-!!! Tham gia thảo luận và học nhóm tại https://discord.gg/SZnnFG6v !!!
-
 # Machine learning for coders
+
+Tham gia thảo luận tại https://discord.gg/SZnnFG6v
 
 ## Learn
 
