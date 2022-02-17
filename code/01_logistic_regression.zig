@@ -9,8 +9,8 @@ fn testFastmath() void {
     // Hàm fastmath's dotProduct là dotProduct của 2 vectors x, y.
     // Cài đặt bình thường chỉ cần 2 dòng code là xong:
     // var dot: f32 = 0; for (x) |v, i| dot += x[i] * y[i];
-    // Hàm fastmath.dotProduct có dùng SIMD trên 4 toán tử f32 trong một lần nhân để tăng tốc độ
-    // Cải thiện được khoảng 60%
+    // Hàm fastmath.dotProduct có kiểu dữ liệu vector build-in của Zig,
+    // thực hiện 1 phép nhân trên 4 toán tử f32 trong một lần để tăng tốc độ
     std.debug.print("dot product của 2 vector [1, 2, 3, 4] và [4, 3, 2, 1] là {d}\n", .{fastmath.dotProduct(&.{ 1, 2, 3, 4 }, &.{ 4, 3, 2, 1 })});
 
     // Test fastmath's sigmoid
