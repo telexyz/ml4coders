@@ -16,7 +16,7 @@ fn testFastmath() void {
     // Test fastmath's sigmoid
     // Hàm này càng đơn giản hơi. Tính trước giá trị sigmoid trên một mảng 512 phần tử,
     // chặn đầu chặn đuôi, còn lại map một giá trị bất kỳ vào 1 ô trên mảng đó.
-    // => Giá trị đầu ra là tương đối (đã được/bị quantized)
+    // => Giá trị đầu ra là tương đối (đã được/bị lượng hóa)
     std.debug.print(
         "sigmoid của 1,2,3,4 là {d:.3},{d:.3},{d:.3},{d:.3}\n",
         .{ fastmath.sigmoid(1), fastmath.sigmoid(2), fastmath.sigmoid(3), fastmath.sigmoid(-4) },
