@@ -12,5 +12,3 @@ _ _ _
 
 ![](screenshots/test-1.png)
 ![](screenshots/test-2.png)
-
-_ _ _
