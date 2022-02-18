@@ -50,3 +50,11 @@ Tham khảo https://github.com/telexyz/nnlm/tree/main/hs-rnnlm
 ## Các dự án sắp làm
 
 ### c/ Viết `lstm-rnn` hoặc `quasi-rnn`
+
+- - -
+
+## Repo tương tự
+
+https://github.com/ZeroSum0x00/Machine-Learning-from-Scratch của bạn Thanh Tú
+
+![](read/_files/thanhtu_knn.png)
