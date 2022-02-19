@@ -9,10 +9,11 @@ const allocator = std.heap.page_allocator;
 // storage is row-major order:
 // https://en.wikipedia.org/wiki/Row-_and_column-major_order
 const Matrix = struct {
-    rows: usize,
-    cols: usize,
-    data: []f32,
-    shallow: bool,
+    rows: usize = 0,
+    cols: usize = 0,
+    size: usize = 0,
+    data: []f32 = undefined,
+    shallow: bool = false,
 
     // Make empty matrix filled with zeros
     // int rows: number of rows in matrix
@@ -21,12 +22,37 @@ const Matrix = struct {
     pub fn init(m: *Matrix, rows: usize, cols: usize) !void {
         m.rows = rows;
         m.cols = cols;
+        m.size = rows * cols;
         m.shallow = false;
-        m.data = try allocator.alloc(f32, m.rows * m.cols);
+        m.data = try allocator.alloc(f32, m.size);
+    }
+
+    pub fn new(rows: usize, cols: usize) !Matrix {
+        var m: Matrix = undefined;
+        try m.init(rows, cols);
+        return m;
     }
 
     pub fn deinit(m: *Matrix) void {
         allocator.free(m.data);
+    }
+
+    // Make a matrix with uniformly random elements
+    // float s: range of randomness, [-s, s]
+    // returns: matrix of rows x cols with elements in range [-s,s]
+    var prng = std.rand.DefaultPrng.init(123);
+    pub fn randomize(m: *Matrix, s: f32) void {
+        const random = prng.random();
+        for (m.data) |*v| v.* = 2 * s * random.float(f32) - s;
+    }
+
+    // // Copy a matrix
+    // // matrix m: matrix to be copied
+    // // returns: matrix that is a deep copy of m
+    pub fn dup(m: *Matrix) !Matrix {
+        var new_matrix = try Matrix.new(m.rows, m.cols);
+        std.mem.copy(f32, new_matrix.data, m.data);
+        return new_matrix;
     }
 };
 
@@ -34,47 +60,18 @@ const expect = std.testing.expect;
 test "Matrix" {
     var m: Matrix = undefined;
     try m.init(4, 5);
-    m.deinit();
+    defer m.deinit();
 
     try expect(m.rows == 4);
     try expect(m.cols == 5);
     try expect(m.data.len == 20);
+
+    m.randomize(5);
+    for (m.data) |v| try expect(v >= -5 and v <= 5);
+
+    const n = try m.dup();
+    for (m.data) |v, i| try expect(v == n.data[i]);
 }
-
-// // Make a matrix with uniformly random elements
-// // int rows, cols: size of matrix
-// // float s: range of randomness, [-s, s]
-// // returns: matrix of rows x cols with elements in range [-s,s]
-// matrix random_matrix(int rows, int cols, float s)
-// {
-//     matrix m = make_matrix(rows, cols);
-//     int i, j;
-//     for(i = 0; i < rows; ++i){
-//         for(j = 0; j < cols; ++j){
-//             m.data[i*cols + j] = 2*s*((float)rand()/RAND_MAX) - s;
-//         }
-//     }
-//     return m;
-// }
-
-// // Free memory associated with matrix
-// // matrix m: matrix to be freed
-// void free_matrix(matrix m)
-// {
-//     if (!m.shallow && m.data) {
-//         free(m.data);
-//     }
-// }
-
-// // Copy a matrix
-// // matrix m: matrix to be copied
-// // returns: matrix that is a deep copy of m
-// matrix copy_matrix(matrix m)
-// {
-//     matrix c = make_matrix(m.rows, m.cols);
-//     // TODO: 1.1 - Fill in the new matrix
-//     return c;
-// }
 
 // // Transpose a matrix
 // // matrix m: matrix to be transposed
