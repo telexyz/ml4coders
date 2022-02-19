@@ -3,7 +3,7 @@
 const std = @import("std");
 
 const stb_image = @cImport({
-    @cInclude("stb_image.h");
+    @cInclude("util/stb_image.h");
 });
 
 pub fn main() !void {
