@@ -1,4 +1,5 @@
-## Thư viện cơ bản để triển khai ứng dụng
+# Thư viện cơ bản để triển khai ứng dụng
+
 
 ## `darknet` để build neural networks
 
@@ -12,11 +13,20 @@ git submodule update
 zig build run
 ```
 
+
+## Đọc ảnh, âm thanh ... https://github.com/nothings/stb
+
+
 ## [`cglm`](https://github.com/recp/cglm) Highly Optimized Graphics Math for C
 
 Tận dụng được các phép toán được tối ưu trên SIMD ...
 
+
+## Cấp phát bộ nhớ nhỏ tối ưu https://github.com/microsoft/mimalloc
+
+
 - - -
+
 
 ### `mlpack` cho machine learning nói chung
 
