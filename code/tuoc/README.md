@@ -19,7 +19,40 @@ https://tiendung.github.io/uwnet/notes/04.html
 ## Neural Networks
 https://tiendung.github.io/uwnet/notes/02.html
 
-. . .
+
+### Feature Extraction Built In
+
+Instead of running a linear model directly on our input features we can add an additional step of processing. First our model recombines the input features  into `transformed features`. Then we can run a linear model on these new features. This is the basic idea behind neural networks!
+
+![](file/nn_features.png)
+
+Above is an example, 2 layer neural network.
+* The first layer is computed as `h = x * w` (`w`: weights, `h`: hidden layer?)
+* The second layer is computed as `y = h * v`.
+
+In small example above we have a model that maps `x -> y` through `hidden layer h` . However, all we are doing is weighted sums, which can be written as matrix multiplication: `h = xw, y=hv`
+
+So our new model is still just a linear model! That’s not good haha. How can we make our new model more powerful so we are actually doing some real feature extraction?
+
+### Activation Functions
+
+At our intermediate or hidden layer we’ll add on an additional function  known as an activation function. This function should be non-linear because we want our feature extraction to be non-linear (otherwise we’ve just constructed one big linear model). The activation function is usually applied element-wise to the vector of weighted sums or neurons. Our new forward propagation will look like: `h = f(x * w), y = h * v`
+
+This new model is definitely non-linear (if we picked a non-linear activation) but how powerful is it?
+
+### The Universal Approximation Theorem
+
+!!! The new neural network is REALLY powerful. All powerful in fact !!!
+
+Ok, not actually ALL powerful but the Universal Approximation Theorem says that given some assumptions and constraints, a neural network with just one hidden layer of sufficient number of neurons can approximate any function inside a bounded domain.
+
+### Training Neural Networks With Backpropagation
+
+The last layer of our network is trained just like linear regression or logistic regression. After calculating the loss we take the derivative with respect to the output. Then we can multiply by the values of  to get the derivative of the loss with respect to the weights `v`.
+
+This is just the same math we used before. Now comes the tricky part. We want to calculate the derivative of the loss with respect to weights `w`, `dL/dw` which we only know how to do if we have `dL/dh`. So first we’ll `backpropagate` the loss from `y` to `h`.
+
+Consider the following: `dL/dh_1 = dL/dy dh/dh_1(h1v1 + h2v2 + h3v3) = dL/dy(v1)`. We are `backpropagating` the `loss` from `y`, through weight `v1`, to `h1`. We can do this using matrix operations as well for all of `h`: `dL/dh = dL/dy v^T`
 
 
 - - -
