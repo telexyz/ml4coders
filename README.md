@@ -13,7 +13,7 @@ Tham gia thảo luận tại https://discord.gg/SZnnFG6v
 
 ## Deep learning in 5-mins
 
-Giải thích ngắn gọn, dễ hiểu về [`ML -> NN => DL`](https://github.com/telexyz/ml4coders/tree/main/code/tuoc#readme)
+Giải thích ngắn gọn, dễ hiểu về [`ML -> NN -> DL`](https://github.com/telexyz/ml4coders/tree/main/code/tuoc#readme). Ai đọc cũng vọc theo được!
 
 
 - - -
