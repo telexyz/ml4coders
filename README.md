@@ -13,7 +13,7 @@ Tham gia thảo luận tại https://discord.gg/SZnnFG6v
 
 ## Deep learning
 
-Giải thích về Machine Learning => Neural Network => Deep Learning [ngắn gọn, dễ hiểu](https://github.com/telexyz/ml4coders/tree/main/code/tuoc#readme)
+Giải thích ngắn gọn, dễ hiểu về [`Machine Learning => Neural Network => Deep Learning`](https://github.com/telexyz/ml4coders/tree/main/code/tuoc#readme)
 
 - - -
 
