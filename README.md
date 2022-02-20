@@ -55,9 +55,3 @@ Tham khảo https://github.com/telexyz/nnlm/tree/main/hs-rnnlm
 ## Sắp làm
 
 ### c/ Viết `lstm-rnn` hoặc `quasi-rnn`
-
-- - -
-
-## Repos gần tương tự
-
-https://github.com/ZeroSum0x00/Machine-Learning-from-Scratch của bạn Thanh Tú
