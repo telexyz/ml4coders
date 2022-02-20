@@ -11,9 +11,10 @@ Tham gia thảo luận tại https://discord.gg/SZnnFG6v
 * Các đoạn code nhỏ đi kèm giải thích chi tiết về những thứ mình học tại [`code`](https://github.com/telexyz/ml4coders/tree/main/code)
 
 
-## Deep learning
+## Deep learning in 5-mins
 
-Giải thích ngắn gọn, dễ hiểu về [`Machine Learning => Neural Network => Deep Learning`](https://github.com/telexyz/ml4coders/tree/main/code/tuoc#readme)
+Giải thích ngắn gọn, dễ hiểu về [`ML -> NN => DL`](https://github.com/telexyz/ml4coders/tree/main/code/tuoc#readme)
+
 
 - - -
 
