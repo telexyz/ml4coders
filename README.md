@@ -11,6 +11,10 @@ Tham gia thảo luận tại https://discord.gg/SZnnFG6v
 * Các đoạn code nhỏ đi kèm giải thích chi tiết về những thứ mình học tại [`code`](https://github.com/telexyz/ml4coders/tree/main/code)
 
 
+## Deep learning
+
+Giải thích về Machine Learning => Neural Network => Deep Learning [ngắn gọn, dễ hiểu](https://github.com/telexyz/ml4coders/tree/main/code/tuoc#readme)
+
 - - -
 
 
@@ -26,7 +30,7 @@ Tham gia thảo luận tại https://discord.gg/SZnnFG6v
 
 3/ `#bậc_cao`: Cài đặt lại một lần nữa ở những ngôn ngữ bậc cao hơn và ml libs có sẵn như `mlpack/python,julia,go`, `trax,torch/python`, `flux/julia`, `axion/elixir` để ôn bài thêm lần nữa và soi xem bản `#nhà_làm` với bản `#bậc_cao` có gì khác biệt? Nên tham khảo các cài đặt đã có để cài đặt và tối ưu theo.
 
-## Các dự án đang làm
+## Các dự án
 
 ### a/ https://github.com/telexyz/embed
 
@@ -47,14 +51,12 @@ Tham khảo https://github.com/telexyz/nnlm/tree/main/hs-rnnlm
 `#nhà_làm` có ghể kế thừa một phần code từ https://github.com/telexyz/embed/blob/main/src/model.zig
 
 
-## Các dự án sắp làm
+## Sắp làm
 
 ### c/ Viết `lstm-rnn` hoặc `quasi-rnn`
 
 - - -
 
-## Repo tương tự
+## Repos gần tương tự
 
 https://github.com/ZeroSum0x00/Machine-Learning-from-Scratch của bạn Thanh Tú
-
-![](read/_files/thanhtu_knn.png)
