@@ -1,6 +1,9 @@
-Tuộc Net: a port of
+Tuộc Net: a implement of
 https://github.com/pjreddie/uwimg/blob/main/src/hw5/classifier.c
 
+- - -
+
+# Lý thuyết
 
 ## Convolutional Neural Networks
 https://tiendung.github.io/uwnet/notes/04.html
