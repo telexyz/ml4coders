@@ -1,5 +1,5 @@
 Tuộc Net: a port of
-https://github.com/pjreddie/uwnet/tree/main/src
+https://github.com/pjreddie/uwimg/blob/main/src/hw5/classifier.c
 
 
 ## Convolutional Neural Networks
