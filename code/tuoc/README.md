@@ -6,12 +6,12 @@ https://github.com/pjreddie/uwnet/tree/main/src
 https://tiendung.github.io/uwnet/notes/04.html
 . . .
 
-
 ### Fully Connected Layers and Images
 . . .
 
 ### Convolutions: Powerful, Local Feature Extraction
 . . .
+
 
 - - -
 
