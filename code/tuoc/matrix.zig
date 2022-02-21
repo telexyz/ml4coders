@@ -15,6 +15,14 @@ const Matrix = struct {
     data: []f32 = undefined,
     shallow: bool = false,
 
+    pub inline fn get(self: Matrix, r: usize, c: usize) f32 {
+        return self.data[r * self.rows + c];
+    }
+
+    pub inline fn set(self: *Matrix, v: f32, r: usize, c: usize) void {
+        self.data[r * self.rows + c] = v;
+    }
+
     // Make empty matrix filled with zeros
     // int rows: number of rows in matrix
     // int cols: number of columns in matrix
@@ -71,6 +79,9 @@ test "Matrix" {
 
     const n = try m.dup();
     for (m.data) |v, i| try expect(v == n.data[i]);
+
+    m.set(0.3, 2, 3);
+    try expect(m.get(2, 3) == 0.3);
 }
 
 // // Transpose a matrix
