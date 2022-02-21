@@ -5,7 +5,10 @@ const matrix = @import("matrix.h");
 const TWOPI: f32 = 6.2831853;
 
 const stb_image = @cImport({
+    @cDefine("STB_IMAGE_IMPLEMENTATION", {});
     @cInclude("stb_image.h");
+
+    @cDefine("STB_IMAGE_WRITE_IMPLEMENTATION", {});
     @cInclude("stb_image_write.h");
 });
 
@@ -20,11 +23,12 @@ const Image = struct {
     }
 
     fn new(w: usize, h: usize, c: usize) !Image {
+        const size: usize = w * h * c;
         var im: Image = .{
             .w = w,
             .h = h,
             .c = c,
-            .data = try allocator.alloc(f32, w * h * c),
+            .data = try allocator.alloc(f32, size),
         };
         return im;
     }
@@ -36,11 +40,8 @@ const Image = struct {
     }
 
     fn save_jpg(im: *Image, name: []const u8) !void {
-        var file: [256]u8 = undefined;
-        defer allocator.free(file);
-
-        std.mem.copy(u8, file[0..name.len], name);
-        file[name.len] = 0;
+        _ = name; // TODO: convert name [] to filename [*c]
+        const filename: [*c]const u8 = "test.jpg";
 
         var data = try allocator.alloc(u8, im.w * im.h * im.c);
         defer allocator.free(data);
@@ -52,20 +53,20 @@ const Image = struct {
             while (i < size) : (i += 1)
                 data[i * im.c + k] = @floatToInt(u8, 255 * im.data[i + k * size]);
         }
-        _ = stb_image.stbi_write_jpg(file[0..name.len], im.w, im.h, im.c, data, 8);
+        _ = stb_image.stbi_write_jpg(filename, @intCast(u16, im.w), @intCast(u16, im.h), @intCast(u16, im.c), &data, 8);
         // if (!success) std.debug.print("Failed to write image {s}\n", .{name});
     }
 };
 
 const expect = std.testing.expect;
 test "Image" {
-    var im = try Image.new(400, 600, 3);
+    var im = try Image.new(400, 600, 1);
     defer im.deinit();
 
     try expect(im.w == 400);
     try expect(im.h == 600);
-    try expect(im.c == 3);
-    try expect(im.data.len == 720_000);
+    try expect(im.c == 1);
+    try expect(im.data.len == 240_000);
 
     im.randomize();
     for (im.data) |v| try expect(v >= 0 and v <= 1);
@@ -74,7 +75,7 @@ test "Image" {
 }
 
 pub fn main() !void {
-    var im = try Image.new(400, 600, 3);
+    var im = try Image.new(40, 60, 1);
     defer im.deinit();
     im.randomize();
     try im.save_jpg("test.jpg");
