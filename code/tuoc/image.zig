@@ -41,7 +41,7 @@ const Image = struct {
 
     fn save_jpg(im: *Image, name: []const u8) !void {
         _ = name; // TODO: convert name [] to filename [*c]
-        const filename: [*c]const u8 = "test.jpg";
+        const filename: [*c]const u8 = "out.jpg";
 
         var data = try allocator.alloc(u8, im.w * im.h * im.c);
         defer allocator.free(data);
