@@ -33,6 +33,7 @@ pub const Matrix = struct {
         m.size = rows * cols;
         m.shallow = false;
         m.data = try allocator.alloc(f32, m.size);
+        std.mem.set(f32, m.data, 0);
     }
 
     pub fn new(rows: usize, cols: usize) !Matrix {

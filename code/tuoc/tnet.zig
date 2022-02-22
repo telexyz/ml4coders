@@ -14,15 +14,18 @@ const Data = struct {
 
 const Model = struct {
     layers: []Layer = undefined,
-    n: usize = undefined,
 
     pub fn init(self: *Model, layers_count: usize) !void {
-        self.n = layers_count;
         self.layers = try allocator.alloc(Layer, layers_count);
     }
 
     pub fn deinit(self: *Model) void {
         allocator.free(self.layers);
+    }
+
+    pub fn forward(m: Model, X: *Matrix) *Matrix {
+        for (m.layers) |layer| X = layer.forward(X);
+        return X;
     }
 };
 
@@ -32,9 +35,9 @@ const Layer = struct {
     dw: Matrix = undefined, //  Current weight updates
     v: Matrix = undefined, //   Past weight updates (for use with momentum)
     out: Matrix = undefined, // Saved output from the layer
-    activation: Activation = undefined, // Activation the layer uses
+    act: Activation = undefined, // Activation the layer uses
 
-    pub fn init(l: *Layer, input: usize, output: usize, activation: Activation) !void {
+    pub fn init(l: *Layer, input: usize, output: usize, act: Activation) !void {
         try l.in.init(1, 1);
         try l.out.init(1, 1);
         try l.v.init(input, output);
@@ -43,7 +46,7 @@ const Layer = struct {
         try l.w.init(input, output);
         l.w.randomize(@sqrt(2.0 / @intToFloat(f32, input)));
 
-        l.activation = activation;
+        l.act = act;
     }
 
     pub fn deinit(l: *Layer) void {
@@ -55,10 +58,10 @@ const Layer = struct {
     }
 
     // Forward propagate information through a layer
-    pub fn forward(l: *Layer, in: Matrix) Matrix {
+    pub fn forward(l: *Layer, in: Matrix) *Matrix {
         l.in = in; // Save the input for backpropagation
         // TODO: fix this! multiply input by weights and apply activation function.
-        return l.out;
+        return &l.out;
     }
 
     // Backward propagate derivatives through a layer
@@ -145,6 +148,9 @@ fn gradientMatrix(m: Matrix, a: Activation, d: Matrix) void {
         }
     }
 }
+
+//
+pub fn main() !void {}
 
 //
 const expect = std.testing.expect;
