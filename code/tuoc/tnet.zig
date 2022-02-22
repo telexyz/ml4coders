@@ -24,8 +24,27 @@ const Model = struct {
     }
 
     pub fn forward(m: Model, X: *Matrix) *Matrix {
-        for (m.layers) |layer| X = layer.forward(X);
-        return X;
+        var Y = X;
+        for (m.layers) |*layer| Y = layer.forward(Y);
+        return Y;
+    }
+
+    // Run a model backward given gradient dL
+    // model m: model to run
+    // matrix dL: partial derivative of loss w.r.t. model output dL/dy
+    pub fn backward(m: Model, dL: *Matrix) !void {
+        var d = dL;
+        var i = m.layers.len - 1;
+        while (true) : (i -= 1) {
+            // std.debug.print("\n{d}\n", .{i});
+            d = m.layers[i].backward(d);
+            if (i == 0) break;
+        }
+    }
+
+    // Update the model weights
+    pub fn update(m: *Model, rate: f32, momentum: f32, decay: f32) void {
+        for (m.layers) |layer| layer.update(rate, momentum, decay);
     }
 };
 
@@ -38,7 +57,7 @@ const Layer = struct {
     activ: Activation = undefined, // Activation the layer uses
 
     pub fn init(l: *Layer, input: usize, output: usize, activ: Activation) !void {
-        try l.in.init(1, 1);
+        // try l.in.init(1, 1);
         try l.out.init(1, 1);
         try l.v.init(input, output);
         try l.dw.init(input, output);
@@ -58,15 +77,15 @@ const Layer = struct {
     }
 
     // Forward propagate information through a layer
-    pub fn forward(l: *Layer, in: Matrix) *Matrix {
-        l.in = in; // Save the input for backpropagation
+    pub fn forward(l: *Layer, in: *Matrix) *Matrix {
+        l.in = in.*; // Save the input for backpropagation
         // TODO: fix this! multiply input by weights and apply activation function.
         return &l.out;
     }
 
     // Backward propagate derivatives through a layer
-    pub fn backward(l: *Layer, in: Matrix) Matrix {
-        l.in = in; // Save the input for backpropagation
+    pub fn backward(l: *Layer, in: *Matrix) *Matrix {
+        l.in = in.*; // Save the input for backpropagation
         // 1.4.1
         // delta is dL/dy
         // TODO: modify it in place to be dL/d(xw)
@@ -74,7 +93,7 @@ const Layer = struct {
         // 1.4.2
         // TODO: then calculate dL/dw and save it in l->dw
 
-        return l.out;
+        return &l.out;
     }
 
     // Update the weights at layer l
@@ -134,8 +153,8 @@ fn activateMatrix(m: Matrix, a: Activation) void {
     }
 }
 
-// Calculates the gradient of an activation function and multiplies it into
-// the delta for a layer
+// Calculates the gradient of an activation function
+// and multiplies it into the delta for a layer
 fn gradientMatrix(m: Matrix, a: Activation, d: Matrix) void {
     _ = a;
     _ = d;
@@ -158,11 +177,17 @@ test "Layer" {
     var l: Layer = undefined;
     try l.init(3, 4, .RELU);
     defer l.deinit();
-    defer l.in.deinit();
 }
 
 test "Model" {
+    var x: Matrix = undefined;
+    try x.init(4, 5);
+    defer x.deinit();
+
     var m: Model = undefined;
     try m.init(3);
     defer m.deinit();
+
+    _ = m.forward(&x);
+    try m.backward(&x);
 }

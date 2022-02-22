@@ -58,7 +58,7 @@ pub const Matrix = struct {
     // // Copy a matrix
     // // matrix m: matrix to be copied
     // // returns: matrix that is a deep copy of m
-    pub fn dup(m: *Matrix) !Matrix {
+    pub fn clone(m: *Matrix) !Matrix {
         var new_matrix = try Matrix.new(m.rows, m.cols);
         std.mem.copy(f32, new_matrix.data, m.data);
         return new_matrix;
@@ -78,7 +78,7 @@ test "Matrix" {
     m.randomize(5);
     for (m.data) |v| try expect(v >= -5 and v <= 5);
 
-    const n = try m.dup();
+    const n = try m.clone();
     for (m.data) |v, i| try expect(v == n.data[i]);
 
     m.set(0.3, 2, 3);
