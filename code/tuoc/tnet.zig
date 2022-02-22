@@ -1,15 +1,36 @@
 // Tuộc Net :D
 
 const std = @import("std");
-const Matrix = @import("matrix.zig").Matrix;
+const allocator = std.heap.page_allocator;
 
+const Image = @import("image.zig").Image;
+const Matrix = @import("matrix.zig").Matrix;
 const Activation = enum { LINEAR, LOGISTIC, RELU, LRELU, SOFTMAX };
 
+const Data = struct {
+    X: Matrix = undefined,
+    y: Matrix = undefined,
+};
+
+const Model = struct {
+    layers: []Layer = undefined,
+    n: usize = undefined,
+
+    pub fn init(self: *Model, layers_count: usize) !void {
+        self.n = layers_count;
+        self.layers = try allocator.alloc(Layer, layers_count);
+    }
+
+    pub fn deinit(self: *Model) void {
+        allocator.free(self.layers);
+    }
+};
+
 const Layer = struct {
-    in: Matrix = undefined, // Saved input to a layer
-    w: Matrix = undefined, // Current weights for a layer
-    dw: Matrix = undefined, // Current weight updates
-    v: Matrix = undefined, // Past weight updates (for use with momentum)
+    in: Matrix = undefined, //  Saved input to a layer
+    w: Matrix = undefined, //   Current weights for a layer
+    dw: Matrix = undefined, //  Current weight updates
+    v: Matrix = undefined, //   Past weight updates (for use with momentum)
     out: Matrix = undefined, // Saved output from the layer
     activation: Activation = undefined, // Activation the layer uses
 
@@ -125,9 +146,16 @@ fn gradientMatrix(m: Matrix, a: Activation, d: Matrix) void {
     }
 }
 
+//
 const expect = std.testing.expect;
 test "Layer" {
     var l: Layer = undefined;
     try l.init(3, 4, .RELU);
     defer l.deinit();
+}
+
+test "Model" {
+    var m: Model = undefined;
+    try m.init(3);
+    defer m.deinit();
 }
