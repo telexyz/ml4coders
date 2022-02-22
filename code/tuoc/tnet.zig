@@ -1,7 +1,7 @@
 // Tuộc Net :D
 
 const std = @import("std");
-const Matrix = @import("matrix");
+const Matrix = @import("matrix.zig").Matrix;
 
 const Activation = enum { LINEAR, LOGISTIC, RELU, LRELU, SOFTMAX };
 
@@ -12,6 +12,60 @@ const Layer = struct {
     v: Matrix = undefined, // Past weight updates (for use with momentum)
     out: Matrix = undefined, // Saved output from the layer
     activation: Activation = undefined, // Activation the layer uses
+
+    pub fn init(l: *Layer, input: usize, output: usize, activation: Activation) !void {
+        try l.in.init(1, 1);
+        try l.out.init(1, 1);
+        try l.v.init(input, output);
+        try l.dw.init(input, output);
+
+        try l.w.init(input, output);
+        l.w.randomize(@sqrt(2.0 / @intToFloat(f32, input)));
+
+        l.activation = activation;
+    }
+
+    pub fn deinit(l: *Layer) void {
+        l.in.deinit();
+        l.w.deinit();
+        l.dw.deinit();
+        l.v.deinit();
+        l.out.deinit();
+    }
+
+    // Forward propagate information through a layer
+    pub fn forward(l: *Layer, in: Matrix) Matrix {
+        l.in = in; // Save the input for backpropagation
+        // TODO: fix this! multiply input by weights and apply activation function.
+        return l.out;
+    }
+
+    // Backward propagate derivatives through a layer
+    pub fn backward(l: *Layer, in: Matrix) Matrix {
+        l.in = in; // Save the input for backpropagation
+        // 1.4.1
+        // delta is dL/dy
+        // TODO: modify it in place to be dL/d(xw)
+
+        // 1.4.2
+        // TODO: then calculate dL/dw and save it in l->dw
+
+        return l.out;
+    }
+
+    // Update the weights at layer l
+    pub fn update(l: *Layer, rate: f32, momentum: f32, decay: f32) void {
+        _ = l;
+        _ = rate * momentum * decay;
+        // TODO:
+        // Calculate Δw_t = dL/dw_t - λw_t + mΔw_{t-1}
+        // save it to l->v
+
+        // Update l->w
+
+        // Remember to free any intermediate results to avoid memory leaks
+
+    }
 };
 
 // typedef struct{
@@ -71,9 +125,9 @@ fn gradientMatrix(m: Matrix, a: Activation, d: Matrix) void {
     }
 }
 
-// Forward propagate information through a layer
-fn forwardLayer(l: *Layer, in: Matrix) Matrix {
-    l.in = in; // Save the input for backpropagation
-    // TODO: fix this! multiply input by weights and apply activation function.
-    return l.out;
+const expect = std.testing.expect;
+test "Layer" {
+    var l: Layer = undefined;
+    try l.init(3, 4, .RELU);
+    defer l.deinit();
 }

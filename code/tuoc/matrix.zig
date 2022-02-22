@@ -8,7 +8,7 @@ const allocator = std.heap.page_allocator;
 // and some data stored as an array of floats
 // storage is row-major order:
 // https://en.wikipedia.org/wiki/Row-_and_column-major_order
-const Matrix = struct {
+pub const Matrix = struct {
     rows: usize = 0,
     cols: usize = 0,
     size: usize = 0,
