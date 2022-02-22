@@ -35,9 +35,9 @@ const Layer = struct {
     dw: Matrix = undefined, //  Current weight updates
     v: Matrix = undefined, //   Past weight updates (for use with momentum)
     out: Matrix = undefined, // Saved output from the layer
-    act: Activation = undefined, // Activation the layer uses
+    activ: Activation = undefined, // Activation the layer uses
 
-    pub fn init(l: *Layer, input: usize, output: usize, act: Activation) !void {
+    pub fn init(l: *Layer, input: usize, output: usize, activ: Activation) !void {
         try l.in.init(1, 1);
         try l.out.init(1, 1);
         try l.v.init(input, output);
@@ -46,11 +46,11 @@ const Layer = struct {
         try l.w.init(input, output);
         l.w.randomize(@sqrt(2.0 / @intToFloat(f32, input)));
 
-        l.act = act;
+        l.activ = activ;
     }
 
     pub fn deinit(l: *Layer) void {
-        l.in.deinit();
+        // l.in.deinit();
         l.w.deinit();
         l.dw.deinit();
         l.v.deinit();
@@ -158,6 +158,7 @@ test "Layer" {
     var l: Layer = undefined;
     try l.init(3, 4, .RELU);
     defer l.deinit();
+    defer l.in.deinit();
 }
 
 test "Model" {
