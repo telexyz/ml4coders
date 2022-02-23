@@ -1,0 +1,980 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" / >
+<title>Parallel and Distributed Programming</title>
+
+
+<style>
+body {counter-reset: h2}
+  h2 {counter-reset: h3}
+  h3 {counter-reset: h4}
+  h4 {counter-reset: h5}
+  h5 {counter-reset: h6}
+
+  h2:before {counter-increment: h2; content: counter(h2) ". "}
+  h3:before {counter-increment: h3; content: counter(h2) "." counter(h3) ". "}
+  h4:before {counter-increment: h4; content: counter(h2) "." counter(h3) "." counter(h4) ". "}
+  h5:before {counter-increment: h5; content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) ". "}
+  h6:before {counter-increment: h6; content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) "." counter(h6) ". "}
+
+  h2.nocount:before, h3.nocount:before, h4.nocount:before, h5.nocount:before, h6.nocount:before { content: ""; counter-increment: none } 
+
+h1 {
+  font-size   : 14pt;
+  font-family : serif;
+  margin      : 10pt;
+  padding     : 3pt 20pt;
+  border-style     : solid;
+  border-width     : 1pt 1pt 0pt 15pt ;
+   
+  border-color     : #99A1AA;
+  background-color : #BBDDBB;
+}
+
+h2 {
+  font-size   : 13pt;
+  font-family : serif;
+  margin      : 10pt;
+  padding     : 3pt 20pt;
+  border-style     : solid;
+  border-width     : 1pt 1pt 0pt 15pt ;
+   
+  border-color     : #99A1AA;
+  background-color : #CCEECC;
+}
+
+h3 {
+  font-size   : 12pt;
+  font-family : serif;
+  margin      : 10pt;
+  padding     : 3pt 20pt;
+  border-style     : solid;
+  border-width     : 1pt 1pt 0pt 1pt;
+  border-color     : #99A1AA;
+  background-color : #DDFFDD;
+}
+
+h4 {
+  font-size   : 10pt;
+  font-family : serif;
+  margin      : 10pt;
+  padding     : 3pt 20pt;
+  border-style     : solid;
+  border-width     : 1pt 1pt 0pt 1pt;
+  border-color     : #99A1AA;
+  background-color : #FFFFFF;
+}
+
+div {
+  font-size   : 12pt;
+  font-family : serif;
+  margin      : 10pt;
+  padding     : 3pt 20pt;
+  border-color     : #99A1AA;
+}
+
+p {
+  font-size   : 12pt;
+  font-family : serif;
+  border-color     : #99A1AA;
+}
+
+pre {
+  background-color:#efe;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>Parallel and Distributed Programming<br />Kenjiro Taura</h1>
+<div>
+<font size=-1>(the page is encoded in UTF-8)</font>
+</div>
+
+<h2>What's New (in the newest-first order)</h2>
+<div>
+  <font color=red>Periodically reload this page.</font>
+  Newer entries come above.
+  <font color="blue">(Dates)</font> in parentheses indicate when they are posted.
+  <ul>
+    <li><font color=blue>(Jan. 15 2021)</font>
+      <font color="red">taulec will not be available for your work,</font>
+      from this weekend until Jan 20,
+      as it is used for an exam of another class during the period.
+      Please use IST cluster for your work.
+      You can still submit and view records unless I say otherwise later.
+    </li>
+    <li><font color=blue>(Jan. 14 2021)</font>
+      Check out <a href="https://taulec.zapto.org/viewer">VGG record viewer</a>, which
+      now has the first successful parallelization on GPU, done by Yukio Siraichi (u00378)
+      and another (u00344)!  I will be improving this page so that you can easily
+      recognize top runners.  Keep fighting! :-)
+    </li>
+      
+    <li><font color=blue>(Jan. 7 2021)</font>
+      We have the last class of this course today.
+      <ol>
+        <li>please do lecture evaluation (survey) in the UTAS</li>
+        <li>an interesting point in submitted VGG data</li>
+        <li><a href="slides/pdf/memory2.pdf" target="_blank">What You Must Know about Memory, Caches, and Shared Memory</a></li>
+        <li>I hope I can briefly cover <a href="slides/pdf/cache.pdf" target="_blank">Analyzing Data Access of Algorithms and How to Make Them Cache-Friendly</a></li>
+      </ol>
+    </li>
+    <li><font color=blue>(Jan. 4 2021)</font>
+      <ol>
+        <li>Fixed a bug of submit, found thans to Anran.</li>
+        <li>Fixed a bug in the page explaining
+          <a href="https://www.eidos.ic.i.u-tokyo.ac.jp/~tau/lecture/parallel_distributed/html/ist_cluster.html#ist-to-taulec" target="_blank">how to ssh from IST cluster to taulec</a>.</li>
+      </ol>
+    </li>
+    <li><font color=blue>(Jan. 4 2021)</font>
+      <ol>
+        <li>update repo (at your leisure)</li>
+        <li>how to submit your progress;
+          check <a href="https://doss-gitlab.eidos.ic.i.u-tokyo.ac.jp/tau/parallel-distributed-handson/-/tree/master/20vgg">README of 20vgg</a>
+        </li>
+        <li><a href="slides/pdf/divide_and_conquer.pdf" target="_blank">
+            Divide and Conquer</a>
+        </li>
+        <li>Hands-on time
+          <ul>
+            <li>Those who chose Option 1 for your final report
+              please submit at least one record (even with the baseline code)
+              during the lecture</li>
+            <li>Work on the merge sort exercise,
+              either on Jupyter notebook (pd08_task.sos)
+              or on IST cluster</li>
+          </ul>
+        </li>
+      </ol>      
+    </li>
+    <li><font color=blue>(Dec. 14 2020)</font>
+      <ol>
+        <li>update repo (00slurm and 10ms)</li>
+        <li>a new Jupyter notebook (pd08_task.sos)</li>
+        <li><a href="slides/pdf/divide_and_conquer.pdf" target="_blank">Divide and Conquer</a>
+        </li>
+        <li>work on a new Jupyter notebook (pd08_task.sos)
+          or on IST cluster (10ms)</li>
+        <li>check 00slurm/README.md to check how to run a parallel job on IST cluster</li>
+      </ol>
+    </li>
+    <li><font color=blue>(Dec. 14 2020)</font>
+      <ol>
+        <li>work on assignment 5 (matrix multiply) [25 mins]
+          <ul>
+            <li><font color="purple">encouraged to work on IST cluster 07mm/ in the repository, but please update Jupyter notebook too,
+                so that I can watch your progress</font>
+            </li>
+          </ul>
+        </li>
+        <li>continue <a href="slides/pdf/peak_cpu.pdf" target="_blank">How to get nearly peak FLOPS (with CPU)</a></li>
+        <li>continue assignment 5 or go ahead to
+          <a href="slides/pdf/memory2.pdf" target="_blank">What You Must Know about Memory, Caches, and Shared Memory</a>
+        </li>
+      </ol>
+    </li>
+    <li><font color=blue>(Dec. 14 2020)</font>
+      I posted two assignments I have already announced during the classd
+      to ITC-LMS.  Check and submit them.
+    </li>
+    <li><font color=blue>(Dec. 7 2020)</font>
+      <ol>
+        <li>please update your repository by doing
+          <pre>
+git fetch upstream            
+git merge upstream/master
+</pre>
+          in your repository; see
+          <a href="html/ist_cluster.html#update_repository" target="_blank">supplementary help</a> for working on IST cluster for more details
+        </li>
+        <li><a href="slides/pdf/peak_cpu.pdf" target="_blank">How to get nearly peak FLOPS (with CPU)</a></li>
+        <li>handson, either on
+          <ul>
+            <li>a new Jupyter notebook (<tt>pd06_cpu_peak.sos</tt>), or</li>
+            <li><tt>parallel-distributed-handson/06axpb</tt> directory
+              in the IST cluster</li>
+          </ul>
+          The results will be clearer and more informative on the latter.
+        </li>
+        <li>Exercise: a simple yet reasonably fast small matrix-matrix multiply for a single core
+          <ul>
+            <li>a new Jupyter notebook (<tt>pd07_mm.sos</tt>), or</li>
+            <li><tt>parallel-distributed-handson/07mm</tt> directory
+              in the IST cluster</li>
+          </ul>
+          The results will be clearer and more informative on the latter.
+        </li>
+      </ol>      
+    </li>
+    <li><font color=blue>(Dec. 7 2020)</font>
+      taulex has been killed, by Amazon.  I hope you finished working on it.
+    </li>
+    <li><font color=blue>(Dec. 1, 2020)</font>
+      taulex is now back.  it may be killed at any moment, by Amazon.
+    </li>
+    <li><font color=blue>(Nov. 30, 2020)</font>
+      <ol>
+        <li><a href="slides/pdf/nn2.pdf" target="_blank">Neural Network</a></li>
+        <li><a href="html/ist_cluster.html" target="_blank">supplementary help</a>
+          for working on IST cluster</li>
+        <li>playing with VGG code (<a href="https://drive.google.com/file/d/1Bgj9ZX0t7alYaK1uiGFgY_MhWNeIbWXj/view?usp=sharing">video</a>)
+          <ul>
+            <li>compile</li>
+            <li>get data (symlink or download)</li>
+            <li>run</li>
+            <li>navigating the source code by html</li>
+            <li>navigating the source code by debugger</li>
+          </ul>
+        </li>
+      </ol>
+    </li>
+    
+    <li><font color=blue>(Nov. 14, 2020)</font> No lecture in Nov. 16 or Nov. 23.  Nov. 16 is reserved for supplementary lectures.  Nov. 23 is a national holiday (Labor Thanksgiving Day).
+    </li>
+    <li><font color=blue>(Nov. 9, 2020)</font> Plan for today
+      <ol>
+        <li>
+          <a href="#credit">How to get the credit</a>
+          and the final report spec (10 mins)
+        </li>
+        <li>
+          Make sure you are able to login the IST cluster
+<pre>
+$ ssh <font color="blue"><i>username</i></font>@login000.cluster.i.u-tokyo.ac.jp
+</pre>
+(Replace <font color="blue"><i>username</i></font> part with the user name on the IST cluster, which you should have received as the comment to your second
+assignment on <a href="https://itc-lms.ecc.u-tokyo.ac.jp/lms/course?idnumber=20204840-10040J01" target="_blank" rel="noopener">ITC-LMS</a> "2. Tell me when your IST cluster account is ready".
+It is different from the one on Jupyter environment. Confusing, sorry!)
+        </li>
+        <li>
+          Register yourself to
+          <a href="https://doss-gitlab.eidos.ic.i.u-tokyo.ac.jp/"
+             target="_blank">
+            the git server</a>, fork
+          <a href="https://doss-gitlab.eidos.ic.i.u-tokyo.ac.jp/tau/parallel-distributed-handson" target="_blank">the baseline code
+            of a possible final report (VGG neural network)
+          </a>,
+          and clone it
+          (<a href="https://drive.google.com/file/d/1wp48xfSuIVjjnr8xTB2HOwORrPx1xm7c/view?usp=sharing">video</a> is available
+          through the <a href="https://itc-lms.ecc.u-tokyo.ac.jp/lms/course?idnumber=20204840-10040J01" target="_blank" rel="noopener">ITC-LMS</a> page)
+          <ul>
+            <li>register your real name (not a fake name)</li>
+            <li>register u-tokyo.ac.jp Email address
+              (contrary to what I am doing in the video)</li>
+            <li>add your SSH key if you want to clone the code via SSH</li>
+          </ul>
+          (15 mins)
+        </li>
+        <li>
+          Play with the VGG code on IST cluser 
+          <ul>
+            <li>See two subdirectories of the base code you cloned
+              <ul>
+                <li>
+                  <a href="https://doss-gitlab.eidos.ic.i.u-tokyo.ac.jp/tau/parallel-distributed-handson/-/tree/master/00slurm" target="_blank">00slurm</a>
+                </li>
+                <li>
+                  <a href="https://doss-gitlab.eidos.ic.i.u-tokyo.ac.jp/tau/parallel-distributed-handson/-/tree/master/20vgg" target="_blank">20vgg</a>
+                </li>
+                <li>
+                  You may find many other directories useful, but
+                  they have largely been (or will be)
+                  superseded by Jupyter notebooks from this year
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="https://login000.cluster.i.u-tokyo.ac.jp/wordpress/">
+                IST cluster manual
+              </a>
+              (accessible
+              only from within the campus network;
+              use SSH port forwarding from home.
+              if you don't know how, here is how)
+            </li>
+          </ul>
+          (15 mins)
+        </li>
+        <li>break (5 mins), hopefully around 17:30</li>
+        <li>Talk about
+          <a href="slides/pdf/nn2.pdf" target="_blank">Neural Network</a>
+          to better understand what VGG is doing and what you will be
+          engaged in if you work on it as your final report (40 mins)
+        </li>
+      </ol>
+    </li>
+    <li><font color=blue>(Nov. 9, 2020)</font>
+      Be prepared for taulex to be down (I do not want to
+      pay 24x7 hours for it); use IST cluster instead
+    </li>
+    
+    <li><font color=blue>(Nov. 2, 2020)</font> Plan for today
+      <ul>
+        <li>start at 16:50</li>
+        <li>start recording</li>
+        <li><a href="slides/pdf/simd2.pdf" target="_blank">SIMD Programming</a></li>
+        <li>new Jupyter notebooks (pd04_simd_1.sos and pd05_simd_2.sos)</li>
+      </ul>
+    </li>
+    <li>answers for assignment #1 and #2 (pd01_omp.sos.ans and pd02_cuda.sos.ans) are available</li>
+    <li><font color=blue>(Oct. 26, 2020)</font> Plan for today
+      <ul>
+        <li>start at 16:50</li>
+        <li>start recording</li>
+        <li>errata on Jupyter (see ITC-LMS forum)</li>
+        <li><a href="slides/pdf/cuda.pdf" target="_blank">CUDA</a> wrap up (25 mins?)</li>
+        <li><a href="slides/pdf/simd2.pdf" target="_blank">SIMD Programming</a></li>
+      </ul>
+    </li>
+    <a name="taulex_not_tauleg"></a>
+    <li><font color=blue>(Oct. 19, 2020)</font> Plan for today
+      <ul>
+        <li>start at 16:50</li>
+        <li>start recording</li>
+        <li>Jupyter env with GPU changed the name to <t>taule<font color="red">x</font>.zapto.org</t></li>
+        <li>more about CUDA (50 mins?)</li>
+        <li>break (5 min)</li>
+        <li>visualizing GPU scheduler (pd03_cuda_sched.sos)</li>
+      </ul>
+    </li>
+    <li><font color=blue>(Oct. 14, 2020)</font> tauleg -&gt; taulex;
+      For a reason that takes time to explain, the hostname of the
+      GPU Jupyter notebook changed from tauleg to taulex.
+      tauleg will hopefully be back again later, but for now, just
+      remember taulex is GPU environment.  Also, to save money,
+      it is using EC2 spot instance and as such it may be killed by Amazon.
+      Let me know if you want to work on it and find it unavailable.
+    </li>
+    <li><font color=blue>(Oct. 12, 2020)</font> Plan for today
+      <ul>
+        <li>start recording</li>
+        <li>Jupyter env with GPU is now available.  Host name is, guess what, <t>taule<font color="red">g</font>.zapto.org</t></li>
+        <li>OpenMP data sharing and race condition (20 min)</li>
+        <li>break (5 min)</li>
+        <li>CUDA</li>
+      </ul>
+    </li>
+    <li><font color=blue>(Oct. 5, 2020)</font> Plan for today
+      <ul>
+        <li>start recording</li>
+        <li>updates on IST cluster, Jupyter environment</li>
+        <li>OpenMP intro</li>
+        <li>OpenMP handson</li>
+      </ul>
+    </li>
+      
+    <li><font color=blue>(Oct. 4, 2020)</font><a name="jupyter_update"></a>
+      The Jupyter environment was updated to Ubuntu 20.04 and GCC 9.3.0,
+      so the issue described <a href="#parallel_master">below</a>
+      no longer occurs.
+      The Jupyter environment was rebooted several times this weekend;
+      if you experienced a disconnection to the environment, it was me.
+    </li>
+    <li><font color=blue>(Sep. 29, 2020)</font><a name="parallel_master"></a>
+      <strike>In "Section 8 Tasks" of the Jupyter notebook pd01_omp.c, the second and all subsequent cells fail to compile with the same reason.</strike>
+      <font color="green">Oct 5. This should work now in the updated environment</font>
+<pre>
+omp_parallel_master.c: In function ...
+omp_parallel_master.c:xx:xx: error: expected `#pragma omp' clause before `master'
+ #pragma omp parallel master
+                      ^~~~~~
+</pre>
+Please fix the line containing
+<pre>
+#pragma omp parallel master
+</pre>
+into two lines
+<pre>
+#pragma omp parallel
+#pragma omp master
+</pre>
+This error happened because <t>#pragma omp parallel master</t> is a new feature from OpenMP 5.0, my local environment with which I checked the code happened support it but the cloud environment doesn't.  Sorry for the inconvenience.  Thanks to Yukio Siraichi for reporting this to me.
+    </li>
+    <li><font color=blue>(Sep. 28, 2020)</font> 
+      <ol>
+        <li>start recording</li>
+        <li>register to ITC-LMS</li>
+        <li>poll on on-campus class</li>
+        <li>intro</li>
+        <li>two trivial assignments</li>
+        <li>OpenMP intro and handson</li>
+      </ol>
+    </li>
+    <li><font color=blue>(Sep. 28, 2020)</font>If you join the class today, even if it may be one-off, please register yourself to this class in <a href="https://itc-lms.ecc.u-tokyo.ac.jp/lms/course?idnumber=20204840-10040J01" target="_blank" rel="noopener">ITC-LMS</a>, to access the hands-on environment.  It is separate from registration for the credit, which you are supposed to do on UTAS when you decide to take the class.</li>
+    <li><font color=blue>(Sep. 27, 2020)</font> <a href="https://itc-lms.ecc.u-tokyo.ac.jp/lms/course?idnumber=20204840-10040J01" target="_blank" rel="noopener">ITC-LMS</a></li>
+    <li><font color=blue>(Sep. 19, 2020)</font> Site up</li>
+  </ul>
+
+  <a href="#last_year">The record of the last year is</a>
+  at the end of this page, FYI.
+  
+</div>
+
+
+<h2>Slides</h2>
+<div>
+  Slides will be updated during the semester
+  
+<ol>
+  <li><a href="slides/pdf/intro.pdf" target="_blank">Introduction</a></li>
+  <li><a href="slides/pdf/openmp2.pdf" target="_blank">OpenMP</a></li> 
+  <li><a href="slides/pdf/cuda.pdf" target="_blank">CUDA</a></li> 
+  <li><a href="slides/pdf/simd2.pdf" target="_blank">SIMD Programming</a></li> 
+  <li><a href="slides/pdf/peak_cpu.pdf" target="_blank">How to get nearly peak FLOPS (with CPU)</a></li> 
+  <li><a href="slides/pdf/memory2.pdf" target="_blank">What You Must Know about Memory, Caches, and Shared Memory</a></li> 
+  <!--<li><a href="slides/pdf/peak_gpu.pdf" target="_blank">Understanding GPU performance</a></li> -->
+  <li><a href="slides/pdf/nn2.pdf" target="_blank">Neural Network Basics</a></li> 
+  <li><a href="slides/vgg_notes/pdf/vgg_notes.pdf" target="_blank">Math notes on VGG</a></li> 
+  <li><a href="slides/pdf/divide_and_conquer.pdf" target="_blank">Divide and Conquer</a></li>
+  <li><a href="slides/pdf/cache.pdf" target="_blank">Analyzing Data Access of Algorithms 
+      and How to Make Them Cache-Friendly</a></li> 
+  <li><a href="slides/pdf/worksteal.pdf" target="_blank">Understanding Task Scheduling Algorithms</a></li> 
+</ol>
+</div>
+
+<h2>Course Objectives</h2>
+<div>
+The main objectives of this course are to have hands-on experiences on parallel programming and good understanding about how to solve problems in parallel and what determines performance of parallel programs.
+</div>
+
+<h2>Lecture Plan</h2>
+<div>
+I wish to cover the topics below, ranging from a very gentle introduction to parallel programming to performance of parallel programs to fundamental topics that may be difficult to understand for first learners (due to time constraints, it's unlikely to fully cover them all).
+</div>
+
+<h3>Languages</h3>
+<div>
+<ul>
+  <li>All written materials (slides, home pages, etc.) 
+    will be in English.</li>
+  <li>Lectures will be in English</li>
+</ul>
+</div>
+
+<h3>Programming Exercises Week(s)</h3>
+<div>
+  <ul>
+    <li>You will have an access to latest CPU and GPU machines</li>
+  </ul>
+</div>
+
+
+<h2>How to get the credit</h2>
+<div>
+  <a name="credit"></a>
+  Here are the requirements for getting the credit.
+
+  <ol>
+    <li>Submit programming exercise assignments</li>
+
+    <li>Write and submit a final report (term paper).
+      <ul>
+        <li>abstract deadline: <font color=red>December 26th 2020 (Sat),
+            23:59.</font></li>
+        <li>final deadline: <font color=red>February 6th 2020 (Sat),
+            23:59.</font></li>
+      </ul>
+      <p>
+        Both are to be submitted through <a href="https://itc-lms.ecc.u-tokyo.ac.jp" target="_blank">ITC-LMS</a>.
+      </p>
+    </li>
+
+  </ol>
+
+  <ul>
+    <li>The abstract can be just a text
+    (detailed instructions will be announced later)
+    of a few paragraphs about  what you will be doing for the final report.
+    This is mainly for those of you who work on "Option 2" below (solve your own problems).
+    </li>
+    <li>
+      The final report must be a logical, consistent,
+      and sufficiently self-contained document, in a PDF file.
+      The topic of the final report can be chosen from
+      the following.
+      <ul>
+        <li>
+          <font color=blue>Option 1: Optimize Neural Network:</font>
+          <p>
+	    I will provide dataset and
+            <a href="https://doss-gitlab.eidos.ic.i.u-tokyo.ac.jp/tau/parallel-distributed-handson/-/tree/master/20vgg" target="_blank">
+            a baseline serial program (C++)</a>
+            of a neural network for image recognition
+            (<a href="http://www.robots.ox.ac.uk/~vgg/research/very_deep/" target="_blank">VGG</a>,
+            pubilished at <a href="https://www.iclr.cc/archive/www/doku.php%3Fid=iclr2015:main.html" target="_blank">ICLR 2015</a>)
+            on <a href="http://www.cs.toronto.edu/~kriz/cifar.html" target="_blank">Cifar-10</a>
+            dataset).  The baseline code is a C++ translation of 
+            <a href="https://github.com/chainer/chainer/blob/master/examples/cifar/models/VGG.py" target="_blank">VGG code distributed with Chainer</a>.
+            You optimize the baseline either on CPU, GPU or both.
+            You are allowed to make a team of up to two.
+            A team of two must work on both CPU and GPU.
+            The most time-consuming operations are matrix multiplications
+            and convolutions.
+          </p>
+          <p>
+            I am working on a toolkit to display and submit
+            records of your runs so that you can analyze
+            the performance of your code and compare it with others.
+            Stay tuned, but do not wait until it is ready
+            before you start playing with it.
+          </p>
+          <p>
+            Neural network is a great example of
+            applying
+            what you have learned (or will learn)
+            in this class
+            to make it faster (multicore, SIMD, instruction level parallelism,
+            GPU, etc.)
+          </p>
+        </li>
+    
+        <li> <font color=blue>Option 2: Solve your problem:</font>
+          Solve a problem you want to get high
+          performance for.  The problem may be
+          one that arises in your research or
+          one that interests you.  It must be
+          one for which you have a good prospect
+          for applying parallelization or
+          vectorization.  Think of good
+          parallel algorithms to get good performance.
+          Apply parallelization and/or
+          vectorization, understand what is the
+          maximum performance achievable, and
+          investigate how close your
+          implementation is.
+          If you choose this option, your abstract must be
+          descriptive and informative enough so that I can
+          get what it is going to be about.
+          <ul>
+            <li>Describe your application or a high-level goal</li>
+            <li>Describe what it does in terms of computation</li>
+            <li>Describe how you are going to apply
+              parallelization/vectorization or other things to make
+              it more high-performance</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <p>
+    <i>I do not want to receive reports from somebody who (almost)
+      have not been engaged in this class at all, just to be sure.</i>
+    I believe it practically does
+    not happen that someone who have never participated in the class
+    finishes all the assignments and final report in the last minute, 
+    but just in case if you are reading
+    this page for the first time in February looking for a class
+    of which the attendance was not a part of evaluation
+    and which allows late submissions so that you still might have a chance
+      to get a credit, I will say this class is not for you
+  </p>
+
+  
+
+  
+</div>
+
+
+
+<h2>Topics</h2>
+<h3>Parallel Programming in Practice</h3>
+<div>
+  <ul>
+    <li>It's easy! --- a quick and gentle introduction to parallel problem solving</li>
+    <li>Some examples of parallel problem solving and programming</li>
+  </ul>
+</div>
+
+<h3>Taxonomy of parallel machines and programming models</h3>
+<div>
+  <ul>
+    <li>What today's machines look like --- parallel computer architecture
+      <ul>
+	<li>Distributed memory machines</li>
+	<li>Multi-core / multi-socket nodes</li>
+	<li>SIMD instructions</li>
+      </ul>
+    </li>
+    <li>Taxonomy of parallel programming models
+      <ul>
+	<li>Finding and expressing parallelism</li>
+	<li>Mapping computation onto compute resources</li>
+	<li>Coordination and communication</li>
+      </ul>
+    </li>
+    <li>Popular programming APIs
+      <ul>
+	<li>OpenMP</li>
+	<li>Intel Threading Building Block</li>
+	<li>Cilk</li>
+	<li>OpenCL</li>
+	<li>OpenACC</li>
+	<li>MPI</li>
+	<li>UPC</li>
+	<li>Chapel</li>
+	<li>X10</li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+<h3>Understanding performance of parallel programs (and achieving high performance)</h3>
+<div>
+  <ul>
+    <li>Do you know the maximum performance of your CPU?</li>
+    <li>Do you know the maximum performance of memory?</li>
+    <li>How to reason about memory traffic of your programs</li>
+    <li>Provable bounds of greedy schedulers</li>
+    <li>Provable bounds of work-stealing schedulers</li>
+    <li>Cache miss bounds of work-stealing schedulers</li>
+  </ul>
+</div>
+
+<h3>Fundamental Topics (as time permits)</h3>
+<div>
+  <ul>
+    <li>Concurrent data structures
+      <ul>
+	<li>Atomic updates without locks</li>
+	<li>Linearlizability: Specifying correctness of concurrent data structures</li>
+	<li>Example lock-free concurrent data structures</li>
+	<li>Transactional memory</li>
+      </ul>
+    </li>
+    
+    <li>Memory consistency models
+      <ul>
+	<li>Sequential consistency</li>
+	<li>How costly is it to maintain sequential consistency?</li>
+	<li>Optimizations that violate sequential consistency</li>
+	<li>Relaxed consistency</li>
+	<li>Implementing shared memory in software</li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+
+<h2>Links and References</h2>
+<div>
+  <ul>
+    <li><a href="http://www.openmp.org/" target="_blank">OpenMP</a>
+      <ul>
+	<li><a href="http://openmp.org/wp/openmp-specifications/" target="_blank" >specification (the newest version as of September 2016 is 4.5)</a></li>
+      </ul>
+    </li>
+    <li><a href="https://docs.nvidia.com/cuda/index.html/" target="_blank">CUDA</a></li>
+    
+    <li><a href="http://threadingbuildingblocks.org/" target="_blank" >Intel threading building block</a>
+      <ul>
+	<li><a href="http://threadingbuildingblocks.org/uploads/81/91/Latest%20Open%20Source%20Documentation/Reference.pdf">reference manual</a></li>
+	<li><a href="http://threadingbuildingblocks.org/uploads/81/91/Latest%20Open%20Source%20Documentation/Design_Patterns.pdf">design patterns</a></li>
+      </ul>
+    </li>
+    <li><a href="http://www.mpi-forum.org/" target="_blank" >MPI</a></li>
+    <ul>
+      <li><a href="http://www.mpi-forum.org/docs/mpi21-report.pdf">specification 2.1</a></li>
+    </ul>
+
+    <li><a href="http://www.upc.gwu.edu/" target="_blank" >UPC</a>
+      <ul>
+	<li><a href="http://upc.gwu.edu/downloads/Manual-1.2.pdf">manual</a></li>
+	<li><a href="http://upc.lbl.gov/" target="_blank" >Berkeley UPC</a> and its <a href="http://upc.lbl.gov/docs/" target="_blank">docs</a></li>
+	<li><a href="http://as.wiley.com/WileyCDA/WileyTitle/productCd-0471220485,descCd-description.html" target="_blank">UPC book</a></li>
+	<li><a href="http://www.upc.gwu.edu/docs/upc_specs_1.2.pdf">specification 1.2</a></li>
+      </ul>
+    </li>
+
+    <li><a href="http://chapel.cray.com/" target="_blank" >Chapel</a>
+      <ul>
+	<li><a href="http://chapel.cray.com/spec/spec-0.92.pdf">specification 0.92</a></li>
+      </ul>
+    </li>
+
+    <!--
+    <li><a href=http://hadoop.apache.org/ >Hadoop</a>
+      and <a href=http://hive.apache.org/ >Hive</a>
+      <ul>
+	<li>
+	  <a href=https://cwiki.apache.org/Hive/home.html>Hive detailed documents</a>,
+	  including:
+	  <ul>
+	    <li><a href=https://cwiki.apache.org/Hive/tutorial.html>tutorial</a> and </li>
+	    <li><a href=https://cwiki.apache.org/Hive/languagemanual.html>
+		language manual</a></li>
+	  </ul>
+	</li>
+      </ul>
+    </li>
+    -->
+  </ul>
+</div>
+
+<a name="last_year"> </a>
+<h2>Record of announcements in the last instance of this lecture</h2>
+  <font color="grey" size="-1">
+    
+    <ul>
+      <li><font color=blue>(Jan. 21)</font>
+        I got messages from several of you that
+        your SpMV report submitted to ITC-LMS disappeared.
+        Please let me know you student ID if it happened to you.
+        I will look into what happened and keep you updated here.
+        Stay tuned.
+      </li>
+      <li><font color=blue>(Jan. 21)</font>
+        <font color=red>... And this ends the lecture.</font>
+        Sorry that
+        I was not able to finish the GPU part of the lecture
+        (as I have been horribly busy in this term and
+        preparing the material for new topics (VGG and GPU)
+        were tougher than I anticipated (I anticipated that)).
+        <i>Thank you for those who were sticking with it until the end.</i>
+      </li>
+      <li><font color=blue>(Jan. 21)</font>
+        <font color=red>We do not have a class today</font>
+        (today is supposed to be the
+        exam for those lectures that do exam; we do not have an
+        exam in this lecture) ...
+      </li>
+      <li><font color=blue>(Jan. 6)</font>
+        In response to some questions concerning what you
+        are supposed to put
+        in the final report, I wrote <a href="years/2018/html/reports.html">
+          a guideline</a>
+      </li>
+      
+      <li><font color=blue>(Jan. 6)</font>
+        Be sure to <a href="#credit">send a brief abstract</a> of your final report
+        before the deadline.
+      </li>
+      <li><font color=blue>(Jan. 6)</font>
+        Almost complete baseline code is now ready (sorry for taking time. It was much harder
+        than anticipated to make everything ready).
+        Merge the diff with
+        <a href="years/2018/handson/tau/parallel-distributed-handson/03spmv/index.html#fetch" target="_blank">
+          the usual procedure</a>.
+        See an <a href="https://doss-gitlab.eidos.ic.i.u-tokyo.ac.jp/tau/parallel-distributed-handson/tree/master/20vgg" target="_blank">updated README.md</a> to learn how you can work efficiently.
+        <a href="years/2018/handson/tau/parallel-distributed-handson/20vgg/doc/html/files.html" target="_blank">
+          A document of the source code</a>
+        is also available.
+      </li>
+      <li><font color=blue>(Dec. 29)</font>
+        I updated the baseline code of VGG.  Please fetch and merge the fix
+        by <a href="years/2018/handson/tau/parallel-distributed-handson/03spmv/index.html#fetch">following the usual procedure.</a>
+        I'll keep working on this, until everything becomes ready.
+      </li>
+      <li><font color=blue>(Dec. 17)</font>
+        Updated the <a href="#credit">How to Get the Credit</a>
+      </li>
+      <li><font color=blue>(Nov. 27)</font>
+        <font color=red>IMPORTANT</font>  I thank Hiroka Ihara
+        for <a href="https://doss-gitlab.eidos.ic.i.u-tokyo.ac.jp/tau/parallel-distributed-handson/issues/1">reporting a bug in matrix generation,</a>
+        which may have been causing irreproducible performance
+        problems in your experiments.
+        Please fetch and merge the fix by
+        <a href="years/2018/handson/tau/parallel-distributed-handson/03spmv/index.html#fetch">following the usual procedure</a>
+        and check if the function coo_elem_cmp looks like this.
+<pre>
+static int coo_elem_cmp(const void * a_, const void * b_) {
+  coo_elem_t * a = (coo_elem_t *)a_;
+  coo_elem_t * b = (coo_elem_t *)b_;
+  if (a-&gt;i &lt; b-&gt;i) return -1;
+  if (a-&gt;i &gt; b-&gt;i) return 1;
+  if (a-&gt;j &lt; b-&gt;j) return -1;
+  if (a-&gt;j &gt; b-&gt;j) return 1;
+  if (a-&gt;a &lt; b-&gt;a) return -1;
+  if (a-&gt;a &gt; b-&gt;a) return 1;
+  return 0;
+}
+</pre>
+      before the fix, the last line was this orz.
+<pre>
+  if (a-&gt;a &gt; b-&gt;a) return -1;  // it should be 1
+</pre>
+For obvious reasons,
+I cannot predict how much this affected your
+experiments. The safe bet is to redo your experiments m(_ _)m
+      </li>
+
+      <li><font color=blue>(Nov. 26)</font>
+        Since a non-negligible number of students do not like
+        the idea of canceling the class on Dec 26,
+        I will withdraw the proposal.
+        We will have a class on Dec 26, as is formally scheduled.
+      </li>
+      
+      <li><font color=blue>(Nov. 26)</font>
+        A quick poll on what to do with another
+        <a href="https://goo.gl/forms/6aEqh3gB9QE3OXsH3">
+          pseudo Monday at the end of this year (Dec 26th)</a>
+        which will be terribly unpopular
+      </li>
+      
+      <li><font color=blue>(Nov. 19)</font>
+        I updated
+        <a href="years/2018/handson/tau/parallel-distributed-handson/03spmv/index.html" target="_blank">
+          SpMV hands-on page</a>
+        with the exact spec of the report,
+        including
+        <ul>
+          <li>the deadline <font color=red>(Dec 7)</font> and</li>
+          <li>how to submit it via
+            <a href="https://itc-lms.ecc.u-tokyo.ac.jp" target="_blank">ITC-LMS</a>.</li>
+        </ul>
+      </li>
+      <li><font color=blue>(Nov. 11)</font>
+        As I said in the class, the class on Nov. 12 is canceled.
+      </li>
+      <li><font color=blue>(Nov. 5)</font>
+        See 
+        <a href="years/2018/handson/tau/parallel-distributed-handson/03spmv/index.html#fetch" target="_blank">this section</a> and
+        <a href="years/2018/handson/tau/parallel-distributed-handson/03spmv/index.html#gitlab-ssh" target="_blank">this section</a>
+        to retrieve changes to my repository.  I updated these sections
+        with more details.
+      </li>
+      
+      <li><font color=blue>(Oct. 29)</font>
+        Once you have forked my original repository, please paste the URL of the
+        top level page of your fork, like
+        https://doss-gitlab.eidos.ic.i.u-tokyo.ac.jp/YOUR_GITLAB_USER_ID/parallel-distributed-handson
+        into the same <a href="https://docs.google.com/spreadsheets/d/1kc8TORdBvBto_DbkVFBfUd9h0r-5KRSreptkDW7U53s/edit#gid=0" target="_blank">spreadsheet.</a>
+      </li>
+      
+      <li><font color=blue>(Oct. 29)</font>
+        Now <a href="https://docs.google.com/spreadsheets/d/1FpHInmJccXQCNjiIl1bbUKINGeuKqP0JF7k8j2c6Rso/edit#gid=0" target="_blank">The login issues spreadsheet</a> is no longer world-editable.
+        If you want to edit it to report your status, please request a permission to me.
+        If you have an issue but do not have a google account, please drop me an Email
+        (I will temporarily make the page world-editable).
+      </li>
+      
+      <li><font color=blue>(Oct. 29)</font>
+        <a href="years/2018/handson/tau/parallel-distributed-handson/03spmv/index.html" target="_blank">
+          A detailed and updated instruction</a>
+        for the first hands-on.
+      </li>
+      <li><font color=blue>(Oct. 15)</font>
+        <font color=red>Please</font> <a href="years/2018/html/login_issues.html">
+          read this page and report your status regarding
+          login,</a> no matter what your status is.
+      </li>
+      <li><font color=blue>(Oct. 15)</font> <a href="https://doss-gitlab.eidos.ic.i.u-tokyo.ac.jp/tau/parallel-distributed-handson">hands-on material</a>
+      </li>
+      <li><font color=blue>(Oct. 1)</font>
+        before the hands-on in the next class (Oct 15),
+        go to <a href="https://login000.cluster.i.u-tokyo.ac.jp/wordpress/" target="_blank">IST cluster manual</a> and
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSd-pQCXdkr4yWgOZ5sMeEa328V8a41qaY5nnzBNdRjv0ECWFQ/viewform?c=0&amp;w=1&amp;usp=mail_form_link" target="_blank">create your account</a> </li>
+      <li><font color=blue>(Sep. 14)</font> Site up</li>
+    </ul>
+  </font>
+
+  <a name="credit"></a>
+  <h2>
+    Record of the announcement about the credit in the last
+  instance of this lecture</h2>
+  <div>
+    
+      <font color="grey" size="-1">
+Here are the requirements for getting the credit.
+
+<ol>
+  <li>You participated in the classes often enough
+    and generally follow what are covered in the
+    class (this is a prerequisite to understand
+    what you are really asked to do in what
+    follows).  As you know, I have not been
+    keeping track of attendance/absence, but I am
+    pretty sure I can tell if somebody who has
+    almost never been in the class suddenly sends
+    a report.</li>
+
+  <li>Finish the SpMV hands-on exercises we had during the class.</li>
+
+  <li>Write and submit a final report (term paper).
+    <ul>
+      <li>abstract deadline: <font color=red>January 18th 2019 (Sat),
+          23:59.</font></li>
+      <li>final deadline: <font color=red>February 9th 2019 (Sat),
+          23:59.</font></li>
+    </ul>
+    <p>
+      Both are to be submitted through <a href="https://itc-lms.ecc.u-tokyo.ac.jp" target="_blank">ITC-LMS</a>.
+    </p>
+  </li>
+</ol>
+
+<p>
+  The abstract can be just a text
+  (detailed instructions will be announced later)
+  of a paragraph or two describing your plan on
+  what you will be doing for the final report.
+</p>
+<p>
+  The final report must be a logical, consistent,
+  and sufficiently self-contained document, in a PDF file.
+  The topic of the final report can be chosen from
+  the following.
+  <ul>
+    <li>
+      <font color=blue>Option 1: Optimize Neural Network:</font>
+      <p>
+	I will provide dataset and a baseline serial
+	program (C++) of a neural network for image recognition
+        (<a href="http://www.robots.ox.ac.uk/~vgg/research/very_deep/" target="_blank">VGG</a>,
+        pubilished at <a href="https://www.iclr.cc/archive/www/doku.php%3Fid=iclr2015:main.html" target="_blank">ICLR 2015</a>)
+        on <a href="http://www.cs.toronto.edu/~kriz/cifar.html" target="_blank">Cifar-10</a>
+        dataset).  The baseline code is a C++ translation of 
+        <a href="https://github.com/chainer/chainer/blob/master/examples/cifar/models/VGG.py" target="_blank">VGG code distributed with Chainer</a>.
+        You optimize the baseline either on CPU, GPU or both.
+        You are allowed to make a team of up to two.
+        A team of two must work on both CPU and GPU.
+        The most time-consuming operations are matrix multiplications.
+      </p>
+      <p>
+        I will provide a tool to submit records
+        and display them in real time through a page similar to 
+        <a href="../2016/examples/18mnist/mnist_records/index.html">
+          this page,</a>
+        which I made the last year.  
+        You are asked to keep it updated with
+        your records, so that we can collectively know
+        how fast they are on each machine.
+      </p>
+      <p>
+        I will give the toolkit (a baseline code, dataset,
+        submission tool and more detailed spec of the problem).
+        I will try to get them ready by the next lecture (Dec 26th).
+      </p>
+    </li>
+    
+    <li> <font color=blue>Option 2: Solve your problem:</font>
+      
+      Solve a problem you want to get high
+      performance for.  The problem may be
+      one that arises in your research or
+      one that interests you.  It must be
+      one for which you have a good prospect
+      for applying parallelization or
+      vectorization.  Think of good
+      parallel algorithms to get good performance.
+      Apply parallelization and/or
+      vectorization, understand what is the
+      maximum performance achievable, and
+      investigate how close your
+      implementation is.
+      
+    </li>
+  </ul>
+</p>
+  </font>
+</div>
+
+</body>
+</html>
+

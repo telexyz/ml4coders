@@ -1,0 +1,360 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" / >
+<title>Get ready to work on VGG in the IST cluster</title>
+
+
+<style>
+body {counter-reset: h2}
+  h2 {counter-reset: h3}
+  h3 {counter-reset: h4}
+  h4 {counter-reset: h5}
+  h5 {counter-reset: h6}
+
+  h2:before {counter-increment: h2; content: counter(h2) ". "}
+  h3:before {counter-increment: h3; content: counter(h2) "." counter(h3) ". "}
+  h4:before {counter-increment: h4; content: counter(h2) "." counter(h3) "." counter(h4) ". "}
+  h5:before {counter-increment: h5; content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) ". "}
+  h6:before {counter-increment: h6; content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) "." counter(h6) ". "}
+
+  h2.nocount:before, h3.nocount:before, h4.nocount:before, h5.nocount:before, h6.nocount:before { content: ""; counter-increment: none } 
+
+h1 {
+  font-size   : 14pt;
+  font-family : serif;
+  margin      : 10pt;
+  padding     : 3pt 20pt;
+  border-style     : solid;
+  border-width     : 1pt 1pt 0pt 15pt ;
+   
+  border-color     : #99A1AA;
+  background-color : #BBDDBB;
+}
+
+h2 {
+  font-size   : 13pt;
+  font-family : serif;
+  margin      : 10pt;
+  padding     : 3pt 20pt;
+  border-style     : solid;
+  border-width     : 1pt 1pt 0pt 15pt ;
+   
+  border-color     : #99A1AA;
+  background-color : #CCEECC;
+}
+
+h3 {
+  font-size   : 12pt;
+  font-family : serif;
+  margin      : 10pt;
+  padding     : 3pt 20pt;
+  border-style     : solid;
+  border-width     : 1pt 1pt 0pt 1pt;
+  border-color     : #99A1AA;
+  background-color : #DDFFDD;
+}
+
+h4 {
+  font-size   : 10pt;
+  font-family : serif;
+  margin      : 10pt;
+  padding     : 3pt 20pt;
+  border-style     : solid;
+  border-width     : 1pt 1pt 0pt 1pt;
+  border-color     : #99A1AA;
+  background-color : #FFFFFF;
+}
+
+div {
+  font-size   : 12pt;
+  font-family : serif;
+  margin      : 10pt;
+  padding     : 3pt 20pt;
+  border-color     : #99A1AA;
+}
+
+p {
+  font-size   : 12pt;
+  font-family : serif;
+  border-color     : #99A1AA;
+}
+
+pre {
+  background-color:#efe;
+}
+
+</style>
+</head>
+
+<body>
+
+  <h1 id="git">Supplementary instructions for working on IST cluster</h1>
+
+  <div>
+    <ul>
+      <li>The first three sections have been covered before, with 
+    <a href="https://drive.google.com/file/d/1wp48xfSuIVjjnr8xTB2HOwORrPx1xm7c/view?usp=sharing">a video</a> available
+    through the <a href="https://itc-lms.ecc.u-tokyo.ac.jp/lms/course?idnumber=20204840-10040J01" target="_blank" rel="noopener">ITC-LMS</a> page</li>
+      <li>The next two sectios are new on Nov 30 and
+        <a href="https://drive.google.com/file/d/10pg9zGp9-azOTQrRSAR1okEnb0qweC96/view?usp=sharing">the video</a> is here
+      </li>
+    </ul>
+  </div>
+
+  
+  <h2>login to IST cluster </h2>
+  <div>
+    Make sure you are able to login the IST cluster by
+<pre>
+$ <u>ssh <font color="blue"><i>username</i></font>@login000.cluster.i.u-tokyo.ac.jp</u>
+</pre>
+Replace <font color="blue"><i>username</i></font> part with the user name on the IST cluster, which you should have received as the comment to your second
+assignment on <a href="https://itc-lms.ecc.u-tokyo.ac.jp/lms/course?idnumber=20204840-10040J01" target="_blank" rel="noopener">ITC-LMS</a> "2. Tell me when your IST cluster account is ready".
+It is different from the one on Jupyter environment. Confusing, sorry!)
+  </div>
+
+  <h2>Register to the gitlab server</h2>
+  <div>
+    Register yourself to
+    <a href="https://doss-gitlab.eidos.ic.i.u-tokyo.ac.jp/"
+       target="_blank">
+      the git server</a>, fork
+    <a href="https://doss-gitlab.eidos.ic.i.u-tokyo.ac.jp/tau/parallel-distributed-handson" target="_blank">the baseline code
+      of a possible final report (VGG neural network)
+    </a>,
+    and clone it
+    (<a href="https://drive.google.com/file/d/1wp48xfSuIVjjnr8xTB2HOwORrPx1xm7c/view?usp=sharing">video</a> is available
+    through the <a href="https://itc-lms.ecc.u-tokyo.ac.jp/lms/course?idnumber=20204840-10040J01" target="_blank" rel="noopener">ITC-LMS</a> page)
+    <ul>
+      <li>register your real name (not a fake name)</li>
+      <li>register u-tokyo.ac.jp Email address
+        (contrary to what I am doing in the video)</li>
+      <li>add your SSH key if you want to clone the code via SSH</li>
+    </ul>
+  </div>
+
+  <h2>Fork my baseline repository and clone your repository</h2>
+  <div>
+    <ul>
+      <li>Visit <a href="https://doss-gitlab.eidos.ic.i.u-tokyo.ac.jp/tau/parallel-distributed-handson">
+          the gitlab repository</a>
+        and fork it, by pressing the "Fork" button found on the upper right part of the page.</li>
+      <li>After forking the repository, clone it by
+<ul>
+<li>SSH:
+<pre>
+$ <u>git clone git@doss-gitlab.eidos.ic.i.u-tokyo.ac.jp:<font color="blue"><i>YOUR_USER_NAME</i></font>/parallel-distributed-handson.git</u>
+</pre>
+or
+</li>
+<li>HTTPS:
+<pre>
+$ <u>git clone https://doss-gitlab.eidos.ic.i.u-tokyo.ac.jp/<font color="blue"><i>YOUR_USER_NAME</i></font>/parallel-distributed-handson.git</u>
+</pre>
+</li>
+</ul>
+YOUR_USER_NAME should be replaced with your user name on the gitlab server;
+you can obtain those URLs by pressing the "Clone" button on the top page of your repository.
+      </li>
+    </ul>
+
+  </div>
+
+  
+  <h2><font color="red">(New on Nov 30)</font> Get updates on the hands-on material to your repository</h2>
+  <a name="update_repository"></a>
+<div>
+  <ul>
+    <li>After you fork my repository, I will keep updating it.  You need to retrieve the changes
+      to your repository (I will not update the main part of the source code unless absolutely necessary;
+      the updates will be mainly supplementary materials I developed after releasing the code).</li>
+
+    <li>To this end, do this once after you clone the repository
+      <ul>
+        <li>SSH:
+<pre>
+$ <u>git remote add upstream git@doss-gitlab.eidos.ic.i.u-tokyo.ac.jp:tau/parallel-distributed-handson.git</u>
+</pre>
+or, 
+        </li>
+        <li>HTTPS:
+<pre>
+$ <u>git remote add upstream https://doss-gitlab.eidos.ic.i.u-tokyo.ac.jp/tau/parallel-distributed-handson.git</u>
+</pre>
+        </li>
+      </ul>
+    </li>
+    <li>Once you have done the above, do the following to reflect changes I made in my repository,
+<pre>
+$ <u>git fetch upstream</u>
+$ <u>git merge upstream/master</u>
+</pre>
+    </li>
+  </ul>
+</div>
+
+<a name="ist-to-gitlab"></a>
+<h2><font color="red">(New on Nov 30)</font> Can't clone via SSH from the IST server?</h2>
+  <div>
+    <ul>
+      <li>
+        If you register your SSH key to the gitlab server, 
+        you are now able to clone and push to your repository via SSH
+        (git@doss-gitlab...) <font color=red><i>on your laptop.</i></font>
+        Obviously, you want to set things up so that you can
+        do it on the IST server.  There are two ways to do it.
+      </li>
+    </ul>
+
+    <ol>
+      <li>generate a key pair on IST server.  login the IST server and do
+<pre>
+login000$ <u>ssh-keygen</u>
+</pre>
+You will be asked to enter a passphrase.  Enter one and register the generated
+public key (<tt>~/.ssh/id_rsa.pub</tt>) following the procedure above.
+      </li>
+      <li>alternatively, you can use the key in your laptop to successfully
+        authenticate yourself on the server.  The mechanism is called
+        <font color=blue><i>SSH agent forwarding</i></font>.
+        If you are using Linux of MacOS, chances are
+        it is already running. Just try this from your laptop.
+<pre>
+your_laptop$ <u>ssh -A login000.cluster.i.u-tokyo.ac.jp</u>
+login000$ <u>git clone git@doss-gitlab....</u>
+</pre>
+If it succeeds, you are done.  
+When you do <tt>git clone git@doss-gitlab...</tt> the ssh-agent running
+on your computer is authenticating yourself on behalf of the IST cluster.
+If it fails, presumably ssh-agent is not running.
+<ul>
+      <li>to check if an ssh-agent is running, just try
+<pre>
+your_laptop$ <u>ps auxww | grep ssh-agent</u>
+tau      12427  0.0  0.0  11304  1556 ?        S    11:19   0:00 <font color=blue>/usr/bin/ssh-agent</font> -D -a /run/user/1000/keyring/.ssh
+</pre>
+If it is not running, bring up one by
+<pre>
+your_laptop$ eval $(ssh-agent)
+your_laptop$ <u>ps auxww | grep ssh-agent</u>  # make sure it's running
+tau      12427  0.0  0.0  11304  1556 ?        S    11:19   0:00 <font color=blue>/usr/bin/ssh-agent</font> -D -a /run/user/1000/keyring/.ssh
+</pre>
+Then try <tt>ssh -A</tt> again.
+<pre>
+your_laptop$ <u>ssh -A login000.cluster.i.u-tokyo.ac.jp</u>
+login000$ <u>git clone git@doss-gitlab....</u>
+</pre>
+      </li>
+      <li>If you are using putty on Windows, you can use
+        <tt>pagent.exe</tt>. download it 
+        <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html"
+           target="_blank">here</a> and click the program to get it running.
+      Find the pagent icon in the task tray and right click on it
+        and choose "Add Key" and add your private key (.ppk) file.
+        Then use putty to login to the server.
+        Make sure go to "SSH" -&gt; "Auth" and check "Allow Agent Forwarding".
+        See <a href="https://www.ssh.com/ssh/putty/putty-manuals/0.68/Chapter9.html"  target="_blank">this page</a> for detailed instructions.
+      </li>
+</ul>
+      </li>
+    </ol>
+  </div>
+
+  <a name="ist-to-taulec"></a>
+  <h2><font color="red">(New on Jan 3 2021)</font>
+    SSH from IST cluster to taulec</h2>
+  <div>
+    The issue and the solution are exactly the same as the
+    <a href="#ist-to-gitlab">previous section</a>, which
+    was about SSH from IST cluster to the gitlab server.
+
+    <ol>
+      <li>generate a key pair on IST server and register public key to the taulec.
+        <ul>
+          <li>STEP 1: make sure you can SSH
+            from your laptop to taulec.  If you can, skip below and jump to
+            STEP 2.
+            in order for this to happen, you must have your laptop's public key
+            in <t>~/.ssh/authorized_keys</t> of taulec.  
+            <ol>
+              <li>go to your Jupyter top page, press the
+                <font color="blue">"upload"</font> button
+                near the upper right corner of the page, and upload your
+                public key on your laptop</li>
+              <li>press <font color="blue">"new"</font> button next to
+                the <font color="blue">upload</font> button and choose
+                <font color="blue">"terminal"</font>
+              </li>
+              <li>copy the uploaded file into <t>~/.ssh/authorized_keys</t> as follows
+<pre>
+taulec$ <u>mkdir -p ~/.ssh/</u>
+taulec$ <u>cp id_rsa.pub ~/.ssh/authorized_keys</u>
+taulec$ <u>chmod 755 ~/.ssh</u>
+taulec$ <u>chmod 644 ~/.ssh/authorized_keys</u>
+</pre>                  
+              </li>
+              <li>make sure you are now able to login from laptop to taulec
+<pre>
+your_laptop$ <u>ssh <i>username-on-taulec</i>@taulec.zapto.org</u>
+</pre>
+              </li>
+            </ol>
+            
+          </li>
+          <li><a name="step2">STEP 2:</a> login the IST server and do
+<pre>
+login000$ <u>ssh-keygen</u>
+</pre>
+You will be asked to enter a passphrase.  Add the generated
+public key (<tt>~/.ssh/id_rsa.pub</tt>) to the end of
+<tt>~/.ssh/authorized_keys</tt> on taulec. e.g.,
+<pre>
+your_laptop$ <strike><u>scp <i>username-on-ist-cluster</i>@login000.cluster.i.u-tokyo.ac.jp:.ssh/id_rsa.pub <i>username-on-taulec</i>@taulec.zapto.org:ist_rsa.pub</u></strike>
+your_laptop$ <u>scp <i>username-on-ist-cluster</i>@login000.cluster.i.u-tokyo.ac.jp:.ssh/id_rsa.pub ist_rsa.pub # rename just in case (avoid name clash)
+your_laptop$ <u>scp ist_rsa.pub <i>username-on-taulec</i>@taulec.zapto.org:ist_rsa.pub</u>
+your_laptop$ <u>ssh <i>username-on-taulec</i>@taulec.zapto.org</u>  
+taulec$ <i>open ~/.ssh/authorized_keys and paste ist_rsa.pub at the end of it</i>
+</pre>
+
+<font color="red">(update Jan 4 20:00)</font>  <i>The scp command above intends to copy a file on IST cluster to taulec, which I wrongly assumed is possible with a single command from your laptop (as long as you are able to login both from your laptop).  It does not seem to be the case, so you should do it in two steps, one step to copy a file on IST cluster to your laptop and another to copy it to taulec.  Sorry, it was my bad.</i>
+
+The last step (<i>open ~/.ssh/authorized_keys and paste ist_rsa.pub at the end of it</i>) is supposed to be done by your favorite editor.  It could be done by a single command as follows, if you know what the command below is doing (a simple typo might screw your important authorized_keys and lose your login to taulec; do not do it unless you are confident).
+<pre>
+taulec$ <u>cat ist_rsa.pub >> ~/.ssh/authorized_keys</u>  
+</pre>
+      </li>
+          </li>
+        </ul>
+      </li>
+      <li>alternatively, you can use 
+        <font color=blue><i>SSH agent forwarding</i></font>.
+        The procedure is exactly the same as the
+        <a href="#ist-to-gitlab">previous section</a> so I do not repeat it.
+      </li>
+    </ol>
+  </div>
+
+  <h2>IST cluster usage basics</h2>
+  <div>
+    <ul>
+      <li>IST cluster is a shared environment which is managed by Slurm resource manager</li>
+      <li>read
+        <a href="https://doss-gitlab.eidos.ic.i.u-tokyo.ac.jp/tau/parallel-distributed-handson/-/tree/master/00slurm">this</a> for the minimum instruction</li>
+    </ul>
+  </div>
+
+  <h2>Accessing IST cluster manual</h2>
+  <div>
+    <a href="https://login000.cluster.i.u-tokyo.ac.jp/wordpress/">
+      IST cluster manual
+    </a> can be accessed only from within the campus network.
+    You can use SSH port forwarding to access it from outside the campus.
+    Look at this 
+    <a href="https://drive.google.com/file/d/1wp48xfSuIVjjnr8xTB2HOwORrPx1xm7c/view?usp=sharing">video</a> 
+  </div>
+
+</body>
+</html>
+
