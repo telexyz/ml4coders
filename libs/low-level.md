@@ -1,5 +1,13 @@
 # Thư viện cơ bản để triển khai ứng dụng
 
+## `bolt` https://huawei-noah.github.io/bolt
+
+```
+git clone https://github.com/huawei-noah/bolt.git && cd bolt
+brew install gnu-getopt && brew link --force gnu-getopt
+chmod 755 install.sh
+./install.sh --target=macos-x86_64_avx2 
+```
 
 ## `darknet` để build neural networks
 
