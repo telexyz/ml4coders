@@ -8,18 +8,55 @@ fn forward(W: Weight, x: f32) f32 {
     return a2; // = purelin(a2)
 }
 
+// def simpson(I, a, b, n):
+//     h = (b - a) / (n - 1)
+//     x = numpy.linspace(a, b, n)
+//     f = []
+//     for i in x:
+//         f.append(I(i))
+//     I_simp = (h/3) * (f[0] + 2*sum(f[:n-2:2]) \
+//                 + 4*sum(f[1:n-1:2]) + f[n-1])
+//     return I_simp
+
 // def integration(x, Phi):
 //   sum = 0
 //   for k in range(1, 30):
-    sum += simpson(lambda t: Phi(x-t)*np.cos(k*t-(pi*ALPHA)/2,)/k**ALPHA, 0, 2*pi, 351)
-//   return sum/pi #+ simpson(lambda t: (x*t)*Phi(t), 0, pi, 101)
+//     sum += simpson(lambda t: Phi(x-t)*numpy.cos(k*t-(pi*ALPHA)/2,)/k**ALPHA, 0, 2*pi, 351)
+//   return sum/pi
 
-fn err(W: Weight, out: Output) f32 {
-    var sum: f32 = 0;
+// TODO: Tự viết hàm integration hoặc dùng thư viện
+// https://www.gnu.org/software/gsl/doc/html/integration.html
+
+fn errThread(W: Weight, out: []const f32, sum: *f32) void {
     _ = W;
-    // for (out) |x| sum += x;
-    // (integration(x, lambda t: NN(W, t)) - right_eq(x))**2
-    // https://www.gnu.org/software/gsl/doc/html/integration.html
+    for (out) |x| sum.* += x;
+    // sum.* += (integration(x, lambda t: NN(W, t)) - right_eq(x))**2
+}
+
+//
+const threads_num: usize = 2; // số threads chạy song song để tăng tốc tính err
+var threads_buffer: [threads_num]std.Thread = undefined;
+const threads = threads_buffer[0..];
+
+fn err(W: Weight, out: Output) !f32 {
+    var sums: [threads_num]f32 = undefined;
+    std.mem.set(f32, sums[0..], 0);
+
+    const step: usize = out.len / threads_num + 1;
+    var start: usize = 0;
+
+    for (threads) |*thread, i| {
+        var end = start + step;
+        if (end > out.len) end = out.len;
+        thread.* = try std.Thread.spawn(.{}, errThread, .{ W, out[start..end], &sums[i] });
+        start += step;
+    }
+
+    var sum: f32 = 0;
+    for (threads) |*thread, i| {
+        thread.join();
+        sum += sums[i];
+    }
     return sum / @intToFloat(f32, HIDDEN_NODES);
 }
 
@@ -31,7 +68,7 @@ pub fn main() !void {
     const y = forward(weights2, 1.5);
     std.debug.print("\n\nforward({d:.3}) = {d:.3}\n", .{ x, y });
 
-    const e = err(weights2, X);
+    const e = try err(weights2, X);
     std.debug.print("\nNew neural network has error: {d:3}\n", .{e});
 }
 
