@@ -39,7 +39,7 @@ const Image = struct {
         for (im.data) |*v| v.* = random.float(f32);
     }
 
-    fn save_jpg(im: *Image, name: []const u8) !void {
+    fn save_jpg(im: *Image, comptime name: []const u8) !void {
         _ = name; // TODO: convert name [] to filename [*c]
         const filename: [*c]const u8 = "out.jpg";
 
@@ -53,32 +53,32 @@ const Image = struct {
             while (i < size) : (i += 1)
                 data[i * im.c + k] = @floatToInt(u8, 255 * im.data[i + k * size]);
         }
-        _ = stb_image.stbi_write_jpg(filename, @intCast(u16, im.w), @intCast(u16, im.h), @intCast(u16, im.c), &data, 8);
-        // if (!success) std.debug.print("Failed to write image {s}\n", .{name});
+        const success = stb_image.stbi_write_jpg(filename, @intCast(u16, im.w), @intCast(u16, im.h), @intCast(u16, im.c), &data, 8);
+        if (success == 0) std.debug.print("Failed to write image {s}\n", .{name});
     }
 };
 
 const expect = std.testing.expect;
 test "Image" {
-    var im = try Image.new(400, 600, 1);
+    var im = try Image.new(400, 600, 3);
     defer im.deinit();
 
     try expect(im.w == 400);
     try expect(im.h == 600);
-    try expect(im.c == 1);
-    try expect(im.data.len == 240_000);
+    try expect(im.c == 3);
+    try expect(im.data.len == 3 * 240_000);
 
     im.randomize();
     for (im.data) |v| try expect(v >= 0 and v <= 1);
 
-    try im.save_jpg("test.jpg");
+    try im.save_jpg("out.jpg");
 }
 
 pub fn main() !void {
     var im = try Image.new(40, 60, 1);
     defer im.deinit();
     im.randomize();
-    try im.save_jpg("test.jpg");
+    try im.save_jpg("out.jpg");
 }
 
 // void save_image(image im, const char *name)
