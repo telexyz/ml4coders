@@ -1,7 +1,22 @@
-Tuộc Net: a implement of
-https://github.com/pjreddie/uwimg/blob/main/src/hw5/classifier.c
+Tuộc Net: an re-implement of
+ * https://github.com/pjreddie/uwimg/blob/main/src/hw5/classifier.c
+ * https://github.com/pjreddie/uwnet/tree/main/src
+
+
+### https://github.com/pjreddie/dl-hw0
+. . .
+
+
+### https://github.com/pjreddie/dl-hw1
+. . .
+
+
+### https://github.com/pjreddie/dl-hw2
+. . .
+
 
 - - -
+
 
 # Lý thuyết
 
