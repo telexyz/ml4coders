@@ -8,10 +8,16 @@ fn forward(W: Weight, x: f32) f32 {
     return a2; // = purelin(a2)
 }
 
+// def integration(x, Phi):
+//   sum = 0
+//   for k in range(1, 30):
+    sum += simpson(lambda t: Phi(x-t)*np.cos(k*t-(pi*ALPHA)/2,)/k**ALPHA, 0, 2*pi, 351)
+//   return sum/pi #+ simpson(lambda t: (x*t)*Phi(t), 0, pi, 101)
+
 fn err(W: Weight, out: Output) f32 {
     var sum: f32 = 0;
     _ = W;
-    for (out) |x| sum += x;
+    // for (out) |x| sum += x;
     // (integration(x, lambda t: NN(W, t)) - right_eq(x))**2
     // https://www.gnu.org/software/gsl/doc/html/integration.html
     return sum / @intToFloat(f32, HIDDEN_NODES);
