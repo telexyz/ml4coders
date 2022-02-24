@@ -6,7 +6,8 @@ from plot import *
 from table import *
 
 # Start minimizing with given initial weights
-weights = min_weight(W0) # tương đương với weights = loadtxt("weights2.txt", delimiter=",")
+weights = min_weight(W0) # hàm này init weights rồi ghi ra file weights2.txt
+# weights = loadtxt("weights2.txt", delimiter=",")
 
 # Process neural network with minimized weights
 print(f"New neural network has error: {error(weights)}")

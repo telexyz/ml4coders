@@ -9,7 +9,7 @@ def I_plot(I, F):
     plt.plot(X, I, label="Integration_NN", color="r", ls="--", lw=3)
     plt.plot(X, F, label="Right EQ")
     plt.legend()
-    plt.savefig("results/IntegrationPlot.png", dpi=1000)
+    plt.savefig("../results/IntegrationPlot.png", dpi=1000)
     print("Integration plot has been saved")
     plt.show()
 
@@ -21,7 +21,7 @@ def NN_plot(Y, Z):
     ax.scatter(X, Y, label="Neural nerwork", s=120, facecolors='none', edgecolors='r')
     #plt.xticks(X)
     ax.legend()
-    plt.savefig("results/NNSolution.png", dpi=1000)
+    plt.savefig("../results/NNSolution.png", dpi=1000)
     print("Neural network plot has been saved")
     plt.show()
 
@@ -35,6 +35,6 @@ def Err_plot(Y, Z):
     ax2.plot(X, pred_err,label="Error")
     #plt.xticks(X)
     ax2.legend()
-    plt.savefig("results/Error.png", dpi=1000)
+    plt.savefig("../results/Error.png", dpi=1000)
     print("Error plot has been saved")
     plt.show()

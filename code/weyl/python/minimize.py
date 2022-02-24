@@ -13,7 +13,7 @@ def min_weight(W0):
     result = fmin_bfgs(error, W0, gtol=MIN_ERR, 
         callback = lambda xk: print(f"Current error value: {error(xk)}") )
 
-    savetxt(f"weights{NUMBER}.txt", result, delimiter=",")
+    savetxt(f"../weights{NUMBER}.txt", result, delimiter=",")
 
     print(f"Save weight{NUMBER} successfully!")
 
