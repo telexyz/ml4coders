@@ -1,10 +1,10 @@
 const std = @import("std");
 
-fn forward(w: Weight, x: f32) f32 {
+fn forward(W: Weight, x: f32) f32 {
     var a2: f32 = 0;
     comptime var i: usize = 0;
     inline while (i < HIDDEN_NODES) : (i += 1)
-        a2 += @sin(x * w[W1_ + i] + w[B1_ + i]) * w[W2_ + i];
+        a2 += @sin(x * W[W1_ + i] + W[B1_ + i]) * W[W2_ + i];
     return a2; // = purelin(a2)
 }
 
