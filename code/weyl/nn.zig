@@ -3,6 +3,7 @@ const std = @import("std");
 fn forward(W: Weight, x: f32) f32 {
     var a2: f32 = 0;
     comptime var i: usize = 0;
+    // Phần này dùng SIMD để tăng tốc
     inline while (i < HIDDEN_NODES) : (i += 1)
         a2 += @sin(x * W[W1_ + i] + W[B1_ + i]) * W[W2_ + i];
     return a2; // = purelin(a2)
