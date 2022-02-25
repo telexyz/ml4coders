@@ -99,10 +99,18 @@ THAM KHẢO
 
 - - -
 
+https://github.com/google-research/vision_transformer#mlp-mixer
+
+MLP-Mixer (Mixer for short) consists of per-patch linear embeddings, Mixer layers, and a classifier head. Mixer layers contain one token-mixing MLP and one channel-mixing MLP, each consisting of two fully-connected layers and a GELU nonlinearity. Other components include: skip-connections, dropout, and linear classifier head.
+
+
+
+- - -
 
 https://zhangtemplar.github.io/mlp-mixer
 
-=> Trainning mlp-mixer tốn kém hơn và phải có nhiều dữ liệu !!!
+=> Trainning mlp-mixer phải có đủ dữ liệu !!!
+ It is also found at similar accuracy, MLP-Mixer and transformer are faster than CNN (ResNet) for inference and training by 2-3 times.
 
 ![](_files/MLP-mixer-2.png)
 
