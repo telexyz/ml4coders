@@ -2,11 +2,12 @@
 
 https://arxiv.org/pdf/2202.04350.pdf
 
+
 ### Tuộc takeaway
 
 Có ba thứ mới mẻ trong bài báo mà Tuộc chưa biết:
 
-1/ thay embedding layer = projection layer sẽ tăng tốc tính toán của mọi mô hình 
+1/ thay embedding layer = projection layer
 
 2/ Google mới đẻ ra thuật toán fast word piece tokenization algorithm 
 
@@ -16,29 +17,29 @@ Có ba thứ mới mẻ trong bài báo mà Tuộc chưa biết:
 
 ### Giới thiệu
 
-Các mô hình ngôn ngữ dựa trên transformer (bert và đồng bọn) nhiều lớn, nhiều tham số đang đang thống trị NLP. Chúng tốn bộ nhớ và tài nguyên khi đưa vào ứng dụng. Ngược lại, những phát kiến gần đây cho thấy rằng những mô hình tinh gọn có độ chính xác cạnh tranh với những mô hình lớn mà chi phí bỏ ra chỉ bằng một phần nhỏ. 
+Các mô hình ngôn ngữ dựa trên transformer (bert và đồng bọn) nhiều lớp, nhiều tham số đang thống trị NLP. Chúng tốn bộ nhớ và tài nguyên khi đưa vào ứng dụng. Những phát kiến gần đây cho thấy rằng có thể thiết kế những mô hình tinh gọn có độ chính xác cạnh tranh với những mô hình lớn mà chi phí bỏ ra chỉ bằng một phần nhỏ.
 
 Trong computer vision, kiến trúc `MLP-Mixer` đã gần chạm ngưỡng độ chính xác cao nhất với số lượng tham số ít hơn hẳn. Vì thế đây là một kiến trúc hấp dẫn về độ hiệu quả cao khi áp dụng cho xử lý ngôn ngữ ở 3 điểm:
 
 1/ Không như RNN (mạng nơ-ron hồi quy), `MLP-Mixer` có thể chạy song song
 
-2/ Không như Transformer, phức tạp của `MLP-Mixer` tăng lên tỉ lệ thuật với chiều dài của chuỗi đầu vào mà vẫn nắm bắt được sự ảnh hưởng từ xa của dữ liệu (long-range dependencies).
+2/ Không như Transformer, độ phức tạp của `MLP-Mixer` tăng lên tỉ lệ thuận với chiều dài của chuỗi đầu vào mà vẫn nắm bắt được sự ảnh hưởng tầm xa của dữ liệu (long-range dependencies).
 
-3/ `MLP-Mixer` chỉ bao gồm MLP blocks, nhờ thế có thể tăng tốc trên rất nhiều phần cứng khác nhau (một mô hình quốc dân không kén phần cứng)
+3/ `MLP-Mixer` chỉ bao gồm MLP blocks, nhờ thế có thể tăng tốc trên rất nhiều phần cứng khác nhau (không kén phần cứng)
 
 
 Tuy lợi ích như thế nhưng chưa có ai áp dụng `MLP-Mixer` để xử lý ngôn ngữ cả, có lẽ do có sự khó khăn việc tạo ra các features phù hợp từ ngữ liệu text. Bài báo thử nghiệm nhiều `embedding-free projection layers` và tìm ra một projection không làm ảnh hưởng tới hiệu quả của mô hình với dữ liệu text. Mô hình đó được gọi là pNLP-Mixer.
 
-Kết quả rất khả quan. pNLP-Mixer gần như đạt được độ chính xác của mBERT (nhiều tham số hơn 38 lần) và vượt trội hơn hẳn so với mô hình tinh gọn mới nổi là pQRNN với số lượng tham số chỉ bằng 1/3 (so với pQRNN). Với tác vụ phân loại chuỗi dài, pNLP-Mixer cho kết quả tốt hơn RoBERTa (họ nhà bert) với số lượng tham số lớn hơn pNLP-Mixer 100 lần! Điều này cho thấy tiềm năng của kiến trúc pNLP-Mixer.
+Kết quả rất khả quan. pNLP-Mixer gần như đạt được độ chính xác của mBERT (nhiều tham số hơn 38 lần) và vượt trội hơn hẳn so với mô hình tinh gọn pQRNN của Google với số lượng tham số chỉ bằng 1/3. Với tác vụ phân loại chuỗi dài, pNLP-Mixer cho kết quả tốt hơn RoBERTa với số lượng tham số lớn hơn pNLP-Mixer 100 lần! Điều này cho thấy tiềm năng của kiến trúc pNLP-Mixer.
 
 
 ## Mô hình
 
 ![](_files/pNLP-Mixer.png)
 
-pNLP-Mixer là kiến trúc dựa trên projection (figure 1), thay vì lưu một ma trận các vector đặc trưng của từng từ trong từ điển (ma trận này có khích thước bằng số từ trong từ điển nhân với độ lớn của vector đặc trưng, có thể lên tới vài triệu phần tử), mô hình này sử dụng một projection layer để ánh xạ cấu trúc hình thái học của từng từ trong chuỗi text đầu vào sử dụng hàm hash không cần huấn luyện (figure 2). Projection layer này có thể được coi là bước trích chọn đặc trưng để tạo ra vector đặc trưng cho từng từ.
+pNLP-Mixer là kiến trúc dựa trên projection (figure 1), thay vì lưu một ma trận các vector đặc trưng của từng từ trong bộ từ vựng (ma trận này có khích thước bằng số từ trong bộ từ vựng nhân với độ lớn của vector đặc trưng, có thể lên tới vài triệu phần tử), mô hình này sử dụng một projection layer để ánh xạ cấu trúc hình thái học của từng từ trong chuỗi text đầu vào sử dụng hàm hash không cần huấn luyện (figure 2). Projection layer này có thể được coi là bước trích chọn đặc trưng để tạo ra vector đặc trưng cho từng từ.
 
-Note: Text Tiếng Việt khác ở chỗ nó theo âm vị chứ không phải hình vị học như tiếng Anh. Tách âm tiết tiếng Việt ra thành các sub-unit như thế nào cho hợp lý là bước đầu tiên cần làm !!!
+__Note__: Text Tiếng Việt encoded theo âm vị chứ không phải hình vị học như tiếng Anh. Tách âm tiết tiếng Việt ra thành các sub-unit như thế nào cho hợp lý là bước đầu tiên cần làm!
 
 Sau bước trích chọn đặc trưng bằng projection layer, các vector đặc trưng được đẩy qua một lớp tuyến tính có thể huấn luyện được (trainable linear layer) gọi là `bottleneck layer`. Đầu ra của `bottleneck layer` là đầu vào của một chuỗi các khối MLP như trong kiến trúc tiêu chuẩn của [MLP-Mixer: An all-mlp architecture for vision](https://arxiv.org/pdf/2105.01601.pdf).
 
@@ -55,11 +56,11 @@ Dựa trên locality sensitive hashing (LSH) để tạo nên các đặt trưng
 
 #### `Bottleneck Layer`
 
-Theo [1] `fingerprints` này chưa trực tiếp hữu dụng cho NN nên  được đẩy tiếp qua `bottleneck layer` để NN có thể học được `representation` của từng từ. 
+Theo [1] `fingerprints` này chưa trực tiếp hữu dụng cho NN nên được đẩy tiếp qua `bottleneck layer` để NN có thể học được `representation` của từng từ.
 
 #### Lớp tiếp theo
 
-`bottleneck layer` cũng chưa học được context của từ nên được đẩy tiếp qua một lớp khác, với pQRNN thì là `bidirectional QRNN encoders`, còn với pNLP thì là MLP-Mixer tiêu chuẩn.
+`bottleneck layer` cũng chưa học được context của từ nên được đẩy tiếp qua một lớp khác, với pQRNN thì là `bidirectional QRNN encoders`, còn với pNLP thì là `MLP-Mixer` tiêu chuẩn.
 
 ![](_files/pQRNN.png)
 
