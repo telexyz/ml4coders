@@ -39,7 +39,7 @@ Kết quả rất khả quan. pNLP-Mixer gần như đạt được độ chính
 
 pNLP-Mixer là kiến trúc dựa trên projection (figure 1), thay vì lưu một ma trận các vector đặc trưng của từng từ trong bộ từ vựng (ma trận này có khích thước bằng số từ trong bộ từ vựng nhân với độ lớn của vector đặc trưng, có thể lên tới vài triệu phần tử), mô hình này sử dụng một projection layer để ánh xạ cấu trúc hình thái học của từng từ trong chuỗi text đầu vào sử dụng hàm hash không cần huấn luyện (figure 2). Projection layer này có thể được coi là bước trích chọn đặc trưng để tạo ra vector đặc trưng cho từng từ.
 
-__Note__: Text Tiếng Việt encoded theo âm vị chứ không phải hình vị học như tiếng Anh. Tách âm tiết tiếng Việt ra thành các sub-unit như thế nào cho hợp lý là bước đầu tiên cần làm!
+__Note__: Text Tiếng Việt encoded theo âm vị chứ không phải hình vị học như tiếng Anh. Tách âm tiết tiếng Việt ra thành các sub-unit như thế nào cho hợp lý là bước đầu tiên cần làm! Thử nghiệm các cách projection khác nhau như `MinHash, Binary, SimHash ..` để chọn projection phù hợp!
 
 Sau bước trích chọn đặc trưng bằng projection layer, các vector đặc trưng được đẩy qua một lớp tuyến tính có thể huấn luyện được (trainable linear layer) gọi là `bottleneck layer`. Đầu ra của `bottleneck layer` là đầu vào của một chuỗi các khối MLP như trong kiến trúc tiêu chuẩn của [MLP-Mixer: An all-mlp architecture for vision](https://arxiv.org/pdf/2105.01601.pdf).
 

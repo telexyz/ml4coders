@@ -1,6 +1,15 @@
-https://ai.googleblog.com/2020/09/advancing-nlp-with-efficient-projection.html
+## Distilling Large Language Models into Tiny and Effective Students using pQRNN
+https://arxiv.org/abs/2101.08890
 
-PRADO+QRNN vs BERT on Text Classification
+we propose pQRNN, a projection-based embedding-free neural encoder that is tiny and effective for NLP tasks. Without pre-training, pQRNNs significantly outperform LSTM models with pre-trained embeddings despite being 140x smaller. With the same number of parameters, they outperform transformer baselines thereby showcasing their parameter efficiency.
+
+Additionally, we show that pQRNNs are effective student architectures for distilling large pre-trained language models ...
+
+- - -
+
+## PRADO+QRNN vs BERT on Text Classification
+https://ai.googleblog.com/2020/09/advancing-nlp-with-efficient-projection.html
+. . .
 
 - - -
 
