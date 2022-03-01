@@ -1,6 +1,6 @@
 Review code của bạn Đức https://github.com/ducntbcit/Weyl
 
-N/iệm vụ của bài toán: Đức mu4. Để tối ưu hàm lỗi Đức dùng phương pháp BFGS (Broyden–Fletcher–Goldfarb–Shanno), pp này đã có sẵn trong pythonốn sử dụng mạng feed forward để giải phương trình tích phân.
+Để tối ưu hàm lỗi Đức dùng phương pháp BFGS (Broyden–Fletcher–Goldfarb–Shanno), pp này đã có sẵn trong pythonốn sử dụng mạng feed forward để giải phương trình tích phân.
 
 Phương trình tích phân là phương trình chứa hàm cần tìm dưới dấu tích phân, cụ thể ở đây là hàm `Phi`.
 
