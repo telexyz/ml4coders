@@ -4,63 +4,63 @@
 const std = @import("std");
 const Vector = std.meta.Vector;
 
-// Idea: Dùng comptime để unroll loop vì độ dài của vector đã biết ở comptime
-pub inline fn dotProduct(v: []const f32, o: []const f32) f32 {
+// Dùng comptime để unroll loop vì độ dài của vector đã biết trước khi code
+pub inline fn dotProduct(comptime len: usize, v: []const f32, o: []const f32) f32 {
     var dot_prod: f32 = 0;
-    var i: usize = 0;
-    while (i < v.len) : (i += 4) {
+    comptime var i: usize = 0;
+    inline while (i < len) : (i += 4) {
         const a: Vector(4, f32) = .{
             v[i],
-            if (i + 1 < v.len) v[i + 1] else 0,
-            if (i + 2 < v.len) v[i + 2] else 0,
-            if (i + 3 < v.len) v[i + 3] else 0,
+            if (i + 1 < len) v[i + 1] else 0,
+            if (i + 2 < len) v[i + 2] else 0,
+            if (i + 3 < len) v[i + 3] else 0,
         };
         const b: Vector(4, f32) = .{
             o[i],
-            if (i + 1 < v.len) o[i + 1] else 0,
-            if (i + 2 < v.len) o[i + 2] else 0,
-            if (i + 3 < v.len) o[i + 3] else 0,
+            if (i + 1 < len) o[i + 1] else 0,
+            if (i + 2 < len) o[i + 2] else 0,
+            if (i + 3 < len) o[i + 3] else 0,
         };
         dot_prod += @reduce(.Add, a * b);
     }
     return dot_prod;
 }
 
-pub inline fn vecMulAdd(v: []const f32, x: f32, o: []f32) void {
+pub inline fn vecMulAdd(comptime len: usize, v: []const f32, x: f32, o: []f32) void {
     var i: usize = 0;
     const x8 = @splat(8, x);
 
-    while (i < v.len) : (i += 8) {
+    inline while (i < len) : (i += 8) {
         const a: Vector(8, f32) = .{
             v[i],
-            v[i + 1],
-            v[i + 2],
-            v[i + 3],
-            v[i + 4],
-            v[i + 5],
-            v[i + 6],
-            v[i + 7],
+            if (i + 1 < len) v[i + 1] else 0,
+            if (i + 2 < len) v[i + 2] else 0,
+            if (i + 3 < len) v[i + 3] else 0,
+            if (i + 4 < len) v[i + 4] else 0,
+            if (i + 5 < len) v[i + 5] else 0,
+            if (i + 6 < len) v[i + 6] else 0,
+            if (i + 7 < len) v[i + 7] else 0,
         };
         const b: Vector(8, f32) = .{
             o[i],
-            o[i + 1],
-            o[i + 2],
-            o[i + 3],
-            o[i + 4],
-            o[i + 5],
-            o[i + 6],
-            o[i + 7],
+            if (i + 1 < len) o[i + 1] else 0,
+            if (i + 2 < len) o[i + 2] else 0,
+            if (i + 3 < len) o[i + 3] else 0,
+            if (i + 4 < len) o[i + 4] else 0,
+            if (i + 5 < len) o[i + 5] else 0,
+            if (i + 6 < len) o[i + 6] else 0,
+            if (i + 7 < len) o[i + 7] else 0,
         };
         const c = a * x8 + b;
 
         o[i] = c[0];
-        o[i + 1] = c[1];
-        o[i + 2] = c[2];
-        o[i + 3] = c[3];
-        o[i + 4] = c[4];
-        o[i + 5] = c[5];
-        o[i + 6] = c[6];
-        o[i + 7] = c[7];
+        if (i + 1 < len) o[i + 1] = c[1];
+        if (i + 2 < len) o[i + 2] = c[2];
+        if (i + 3 < len) o[i + 3] = c[3];
+        if (i + 4 < len) o[i + 4] = c[4];
+        if (i + 5 < len) o[i + 5] = c[5];
+        if (i + 6 < len) o[i + 6] = c[6];
+        if (i + 7 < len) o[i + 7] = c[7];
     }
 }
 
@@ -146,5 +146,6 @@ const SIGMOID_VALUES: [SIGMOID_SIZE]f32 = .{
 };
 
 pub fn main() !void {
-    std.debug.assert(20 == dotProduct(&.{ 1, 2, 3, 4 }, &.{ 4, 3, 2, 1 }));
+    std.debug.assert(20 == dotProduct(4, &.{ 1, 2, 3, 4 }, &.{ 4, 3, 2, 1 }));
+    std.debug.assert(1 == dotProduct(1, &.{1}, &.{1}));
 }
