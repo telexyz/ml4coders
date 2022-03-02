@@ -11,15 +11,15 @@ pub inline fn dotProduct(v: []const f32, o: []const f32) f32 {
     while (i < v.len) : (i += 4) {
         const a: Vector(4, f32) = .{
             v[i],
-            v[i + 1],
-            v[i + 2],
-            v[i + 3],
+            if (i + 1 < v.len) v[i + 1] else 0,
+            if (i + 2 < v.len) v[i + 2] else 0,
+            if (i + 3 < v.len) v[i + 3] else 0,
         };
         const b: Vector(4, f32) = .{
             o[i],
-            o[i + 1],
-            o[i + 2],
-            o[i + 3],
+            if (i + 1 < v.len) o[i + 1] else 0,
+            if (i + 2 < v.len) o[i + 2] else 0,
+            if (i + 3 < v.len) o[i + 3] else 0,
         };
         dot_prod += @reduce(.Add, a * b);
     }
