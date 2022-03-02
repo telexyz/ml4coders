@@ -26,10 +26,10 @@ pub inline fn dotProduct(comptime len: usize, v: []const f32, o: []const f32) f3
     return dot_prod;
 }
 
-pub inline fn vecMulAdd(comptime len: usize, v: []const f32, x: f32, o: []f32) void {
-    var i: usize = 0;
+pub inline fn vecMulAdd(comptime len: usize, v: []const f32, x: f32, o: []f32) []const f32 {
     const x8 = @splat(8, x);
 
+    comptime var i: usize = 0;
     inline while (i < len) : (i += 8) {
         const a: Vector(8, f32) = .{
             v[i],
@@ -62,6 +62,7 @@ pub inline fn vecMulAdd(comptime len: usize, v: []const f32, x: f32, o: []f32) v
         if (i + 6 < len) o[i + 6] = c[6];
         if (i + 7 < len) o[i + 7] = c[7];
     }
+    return o;
 }
 
 pub inline fn sigmoid(x: f32) f32 {
@@ -148,4 +149,6 @@ const SIGMOID_VALUES: [SIGMOID_SIZE]f32 = .{
 pub fn main() !void {
     std.debug.assert(20 == dotProduct(4, &.{ 1, 2, 3, 4 }, &.{ 4, 3, 2, 1 }));
     std.debug.assert(1 == dotProduct(1, &.{1}, &.{1}));
+    var o: [1]f32 = .{1};
+    std.debug.assert(4.0 == vecMulAdd(1, &.{1}, 3, o[0..])[0]);
 }
