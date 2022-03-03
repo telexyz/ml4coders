@@ -8,13 +8,6 @@ https://cogcomp.seas.upenn.edu/Data/QA/QC
 * `data/trec_test.label` => https://cogcomp.seas.upenn.edu/Data/QA/QC/TREC_10.label
 
 
-## Cài đặt bằng Python
-
-https://github.com/tiepvupsu/tiepvupsu.github.io/blob/master/assets/LogisticRegression/LogisticRegression_post.ipynb
-
-Từ https://machinelearningcoban.com/2017/01/27/logisticregression
-
-
 ## Tài liệu khác
 
 https://www.youtube.com/watch?v=qZSqcu2D7zQ
