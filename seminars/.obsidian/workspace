@@ -1,0 +1,94 @@
+{
+  "main": {
+    "id": "0fdf98bb76b4946b",
+    "type": "split",
+    "children": [
+      {
+        "id": "f2d75af1de15792a",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "Dạo bước vNLP cùng Telexyz.md",
+            "mode": "source",
+            "source": false
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "50597d08f520a02d",
+    "type": "split",
+    "children": [
+      {
+        "id": "fdfbec091da17363",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "08fc44a55e3d92ec",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "a0c0063ffc1dbfa7",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "892558c2dcbfd274",
+    "type": "split",
+    "children": [
+      {
+        "id": "81affe29748edb0d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "18ac04c9a7ba958d",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Dạo bước vNLP cùng Telexyz.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "f2d75af1de15792a",
+  "lastOpenFiles": [
+    "Dạo bước vNLP cùng Telexyz.md"
+  ]
+}
